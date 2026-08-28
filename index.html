@@ -1,174 +1,196 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pink Schedule App</title>
+<meta name="theme-color" content="#f47aaa">
+<meta name="description" content="Minimal Pink Schedule App">
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+<link rel="manifest" href="manifest.webmanifest">
+
+<title>Pink Schedule</title>
 
 <style>
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 :root {
-    --pink: #ff4f9a;
-    --pink2: #ff91c3;
-    --bg: #fff4f8;
-    --card: #ffffff;
-    --text: #333;
-    --muted: #999;
-    --line: #ffd5e5;
+    --pink: #f47aaa;
+    --pink-light: #fff2f7;
+    --white: #ffffff;
+    --text: #333333;
+    --gray: #999999;
+    --border: #f3d4e1;
+    --soft: #fff8fb;
 }
 
 body.dark {
-    --bg: #171217;
-    --card: #261e25;
-    --text: #fff;
-    --muted: #aaa;
-    --line: #523443;
+    --pink: #ff88b5;
+    --pink-light: #1b1619;
+    --white: #272126;
+    --text: #ffffff;
+    --gray: #aaaaaa;
+    --border: #49333e;
+    --soft: #30272d;
 }
 
 body {
-    background: var(--bg);
+    background: var(--pink-light);
     color: var(--text);
     min-height: 100vh;
-    transition: .3s;
 }
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
-#login {
+#loginPage {
     min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 20px;
-    background: linear-gradient(135deg, #fff0f7, #ffc5dc);
 }
 
-.login-box {
+.login-card {
     width: 100%;
-    max-width: 390px;
-    background: white;
-    padding: 35px;
-    border-radius: 30px;
+    max-width: 370px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    padding: 34px 24px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(255, 79, 154, .25);
+    box-shadow: 0 12px 35px rgba(244, 122, 170, 0.12);
 }
 
 .logo {
-    width: 85px;
-    height: 85px;
+    width: 68px;
+    height: 68px;
     margin: auto;
-    border-radius: 27px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 42px;
+    border-radius: 21px;
+    background: var(--pink);
     color: white;
-    background: linear-gradient(135deg, var(--pink), var(--pink2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 31px;
 }
 
-.login-box h1 {
+.login-card h1 {
     color: var(--pink);
-    margin: 18px 0 7px;
+    font-size: 25px;
+    margin-top: 15px;
 }
 
-.login-box p {
-    color: #999;
-    margin-bottom: 25px;
+.login-card p {
+    color: var(--gray);
+    font-size: 14px;
+    margin: 8px 0 22px;
+}
+
+/* =========================
+   INPUTS / BUTTONS
+========================= */
+
+input,
+textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--text);
+    outline: none;
 }
 
 input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid var(--line);
-    border-radius: 15px;
-    background: var(--card);
-    color: var(--text);
-    outline: none;
-    margin-bottom: 15px;
+    padding: 14px;
 }
 
-input:focus {
+textarea {
+    padding: 13px;
+    resize: vertical;
+    min-height: 120px;
+}
+
+input:focus,
+textarea:focus {
     border-color: var(--pink);
 }
 
-.main-btn {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 15px;
-    background: linear-gradient(135deg, var(--pink), var(--pink2));
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+button {
     cursor: pointer;
 }
 
-/* APP */
+.primary {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: var(--pink);
+    color: white;
+    font-weight: bold;
+}
+
+.secondary {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: var(--pink-light);
+    color: var(--pink);
+    font-weight: bold;
+}
+
+/* =========================
+   APP
+========================= */
 
 #app {
     display: none;
-    padding-bottom: 90px;
+    min-height: 100vh;
+    padding-bottom: 78px;
 }
 
-.topbar {
-    background: var(--card);
-    padding: 15px 5%;
+header {
+    height: 65px;
+    padding: 0 20px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 10;
-    box-shadow: 0 3px 15px rgba(0,0,0,.08);
 }
 
-.logo-small {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-small-icon {
-    width: 43px;
-    height: 43px;
-    border-radius: 13px;
-    background: var(--pink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-
-.logo-small h2 {
+header h2 {
     color: var(--pink);
-    font-size: 20px;
-}
-
-.theme-btn {
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 12px;
-    background: var(--bg);
-    cursor: pointer;
     font-size: 19px;
 }
 
-/* PAGES */
+.theme-btn {
+    width: 39px;
+    height: 39px;
+    border: none;
+    border-radius: 11px;
+    background: var(--pink-light);
+    color: var(--pink);
+    font-size: 18px;
+}
+
+/* =========================
+   PAGES
+========================= */
 
 .page {
     display: none;
     width: 92%;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 25px auto;
 }
 
@@ -176,291 +198,310 @@ input:focus {
     display: block;
 }
 
-/* HOME */
+/* =========================
+   HOME
+========================= */
 
 .welcome {
-    padding: 28px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, var(--pink), var(--pink2));
+    background: var(--pink);
     color: white;
-    margin-bottom: 20px;
-    box-shadow: 0 12px 30px rgba(255,79,154,.25);
+    padding: 25px;
+    border-radius: 21px;
+    margin-bottom: 18px;
 }
 
 .welcome small {
-    opacity: .85;
+    opacity: 0.82;
 }
 
 .welcome h1 {
-    margin: 6px 0;
+    margin: 7px 0;
+    font-size: 25px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+.empty-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 21px;
+    padding: 40px 22px;
+    text-align: center;
 }
 
-.card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 22px;
-}
-
-.card-icon {
-    font-size: 32px;
+.empty-icon {
+    font-size: 40px;
     margin-bottom: 10px;
 }
 
-.card h3 {
+.empty-card h2 {
     color: var(--pink);
-    margin-bottom: 5px;
+    font-size: 20px;
 }
 
-.card p {
-    color: var(--muted);
+.empty-card p {
+    color: var(--gray);
     font-size: 14px;
+    margin: 8px 0 20px;
 }
 
-/* SCHEDULE */
+/* =========================
+   SCHEDULE
+========================= */
 
-.schedule-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.schedule-header h2 {
+.page-title {
     color: var(--pink);
+    margin-bottom: 15px;
 }
 
 .search {
-    max-width: 300px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .week {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
+    gap: 10px;
 }
 
 .day {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 14px;
-    min-height: 300px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 13px;
+    min-height: 220px;
 }
 
 .day h3 {
     color: var(--pink);
+    font-size: 13px;
     text-align: center;
-    margin-bottom: 13px;
+    margin-bottom: 12px;
 }
 
 .class-item {
-    background: var(--bg);
-    border-left: 4px solid var(--pink);
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 10px;
+    background: var(--soft);
+    border-left: 3px solid var(--pink);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
 }
 
 .class-item .time {
-    font-size: 11px;
     color: var(--pink);
+    font-size: 10px;
     font-weight: bold;
 }
 
 .class-item strong {
     display: block;
     margin: 4px 0;
+    font-size: 13px;
 }
 
 .class-item small {
-    color: var(--muted);
+    color: var(--gray);
+    font-size: 10px;
 }
 
-/* SCANNER */
+.no-class {
+    color: #b8b8b8;
+    text-align: center;
+    padding-top: 28px;
+    font-size: 12px;
+}
 
-.scanner-box {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 25px;
-    padding: 25px;
-    max-width: 500px;
+/* =========================
+   SCANNER
+========================= */
+
+.scanner-card {
+    width: 100%;
+    max-width: 450px;
     margin: auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 21px;
+    padding: 23px;
     text-align: center;
 }
 
-.scanner-box h2 {
+.scanner-card h2 {
     color: var(--pink);
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
 
-.scanner-box p {
-    color: var(--muted);
-    margin-bottom: 18px;
+.scanner-card p {
+    color: var(--gray);
+    font-size: 13px;
+    margin-bottom: 16px;
 }
 
-#reader {
+#camera {
+    display: none;
     overflow: hidden;
-    border-radius: 18px;
-}
-
-.scan-status {
+    border-radius: 16px;
+    background: #111;
     margin-top: 15px;
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--bg);
-    color: var(--pink);
 }
 
-/* NOTIFICATIONS */
+#video {
+    width: 100%;
+    display: block;
+}
 
-.notification-card {
-    background: var(--card);
-    border: 1px solid var(--line);
+.status {
+    color: var(--pink);
+    font-size: 13px;
+    margin: 13px 0;
+}
+
+.manual-box {
+    display: none;
+    margin-top: 14px;
+}
+
+.manual-box textarea {
+    margin-bottom: 10px;
+}
+
+/* =========================
+   ALERTS
+========================= */
+
+.alert-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 17px;
     padding: 18px;
-    border-radius: 18px;
     margin-bottom: 12px;
 }
 
-.notification-card strong {
+.alert-card strong {
     color: var(--pink);
 }
 
-.notification-card p {
+.alert-card p {
+    color: var(--gray);
+    font-size: 13px;
     margin-top: 5px;
-    color: var(--muted);
 }
 
-/* PROFILE */
+/* =========================
+   PROFILE
+========================= */
 
-.profile {
-    max-width: 500px;
+.profile-card {
+    max-width: 400px;
     margin: auto;
-    background: var(--card);
-    border-radius: 25px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 21px;
     padding: 30px;
     text-align: center;
-    border: 1px solid var(--line);
 }
 
 .avatar {
-    width: 90px;
-    height: 90px;
-    margin: auto;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--pink), var(--pink2));
+    margin: auto;
+    background: var(--pink);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
-    color: white;
+    font-size: 30px;
 }
 
-.profile h2 {
+.profile-card h2 {
     color: var(--pink);
-    margin: 15px 0 5px;
+    margin-top: 12px;
 }
 
-.profile p {
-    color: var(--muted);
+.profile-card p {
+    color: var(--gray);
+    margin-top: 4px;
 }
 
-.logout {
+.logout-btn {
     margin-top: 20px;
-    padding: 13px 25px;
+    padding: 11px 20px;
     border: none;
-    border-radius: 13px;
-    background: #ff5c83;
-    color: white;
-    font-weight: bold;
+    border-radius: 10px;
+    background: #eeeeee;
+    color: #555;
 }
 
-/* BOTTOM NAV */
+/* =========================
+   NAVIGATION
+========================= */
 
-.bottom-nav {
+nav {
     position: fixed;
-    bottom: 0;
     left: 0;
     right: 0;
-    background: var(--card);
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: center;
+    bottom: 0;
+    height: 70px;
+    background: var(--white);
+    border-top: 1px solid var(--border);
     z-index: 20;
 }
 
-.nav-inner {
-    width: 100%;
-    max-width: 700px;
+.nav {
+    max-width: 620px;
+    height: 100%;
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
 
-.nav-btn {
+.nav button {
     border: none;
     background: transparent;
-    color: var(--muted);
-    padding: 12px 5px;
-    cursor: pointer;
-    font-size: 11px;
+    color: var(--gray);
+    font-size: 10px;
 }
 
-.nav-btn span {
+.nav button span {
     display: block;
-    font-size: 21px;
+    font-size: 20px;
     margin-bottom: 3px;
 }
 
-.nav-btn.active {
+.nav button.active {
     color: var(--pink);
-    font-weight: bold;
 }
 
-/* TOAST */
+/* =========================
+   TOAST
+========================= */
 
 .toast {
-    position: fixed;
-    bottom: 90px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--card);
-    border-left: 5px solid var(--pink);
-    padding: 15px 20px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
     display: none;
-    z-index: 50;
+    position: fixed;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--white);
+    color: var(--text);
+    border-left: 4px solid var(--pink);
+    border-radius: 12px;
+    padding: 13px 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+    white-space: nowrap;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width: 850px) {
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 800px) {
     .week {
         grid-template-columns: 1fr;
     }
 
     .day {
-        min-height: auto;
-    }
-
-    .schedule-header {
-        display: block;
-    }
-
-    .search {
-        max-width: none;
-        margin-top: 15px;
+        min-height: 120px;
     }
 }
 </style>
@@ -468,26 +509,32 @@ input:focus {
 
 <body>
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<section id="login">
+<section id="loginPage">
 
-    <div class="login-box">
+    <div class="login-card">
 
-        <div class="logo">📅</div>
+        <div class="logo">♡</div>
 
         <h1>Pink Schedule</h1>
 
-        <p>Smart scheduling made beautiful 💗</p>
+        <p>Simple. Pretty. Organized.</p>
 
         <input
             id="nameInput"
             type="text"
-            placeholder="Enter your student name"
+            placeholder="Student name"
+            autocomplete="name"
         >
 
-        <button class="main-btn" onclick="login()">
-            ✨ Get Started
+        <button
+            class="primary"
+            onclick="login()"
+        >
+            Continue
         </button>
 
     </div>
@@ -495,312 +542,311 @@ input:focus {
 </section>
 
 
-<!-- APPLICATION -->
+<!-- =========================
+     APP
+========================= -->
 
 <section id="app">
 
-    <header class="topbar">
+<header>
 
-        <div class="logo-small">
+    <h2>Pink Schedule ♡</h2>
 
-            <div class="logo-small-icon">
-                📅
-            </div>
+    <button
+        class="theme-btn"
+        onclick="toggleTheme()"
+        aria-label="Toggle theme"
+    >
+        ☾
+    </button>
 
-            <div>
-                <h2>Pink Schedule</h2>
-            </div>
-
-        </div>
-
-        <button
-            class="theme-btn"
-            onclick="toggleTheme()"
-        >
-            🌙
-        </button>
-
-    </header>
+</header>
 
 
-    <!-- HOME -->
+<!-- HOME -->
 
-    <main id="home" class="page active">
+<section id="homePage" class="page active">
 
-        <div class="welcome">
+    <div class="welcome">
 
-            <small>WELCOME BACK 💗</small>
+        <small>WELCOME</small>
 
-            <h1>
-                Hi, <span id="welcomeName"></span>!
-            </h1>
+        <h1>
+            Hi, <span id="welcomeName"></span> ♡
+        </h1>
 
-            <p>
-                Stay organized and never miss a class.
-            </p>
+        <p>Your classes in one simple place.</p>
 
-        </div>
+    </div>
 
+    <div class="empty-card">
 
-        <div class="cards">
+        <div class="empty-icon">♡</div>
 
-            <div class="card">
-                <div class="card-icon">📚</div>
-                <h3 id="totalClasses">15</h3>
-                <p>Total classes this week</p>
-            </div>
+        <h2 id="homeTitle">
+            Your schedule is empty
+        </h2>
 
-            <div class="card">
-                <div class="card-icon">📷</div>
-                <h3>QR Scanner</h3>
-                <p>Quickly import your schedule</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🔔</div>
-                <h3>Reminders</h3>
-                <p>Never forget your classes</p>
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- SCHEDULE -->
-
-    <main id="schedulePage" class="page">
-
-        <div class="schedule-header">
-
-            <h2>📚 My Weekly Schedule</h2>
-
-            <input
-                class="search"
-                id="search"
-                placeholder="🔎 Search classes..."
-                onkeyup="searchClasses()"
-            >
-
-        </div>
-
-
-        <div class="week" id="week">
-
-            <div class="day" data-day="Monday">
-                <h3>MONDAY</h3>
-                <div class="classes"></div>
-            </div>
-
-            <div class="day" data-day="Tuesday">
-                <h3>TUESDAY</h3>
-                <div class="classes"></div>
-            </div>
-
-            <div class="day" data-day="Wednesday">
-                <h3>WEDNESDAY</h3>
-                <div class="classes"></div>
-            </div>
-
-            <div class="day" data-day="Thursday">
-                <h3>THURSDAY</h3>
-                <div class="classes"></div>
-            </div>
-
-            <div class="day" data-day="Friday">
-                <h3>FRIDAY</h3>
-                <div class="classes"></div>
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- SCANNER -->
-
-    <main id="scan" class="page">
-
-        <div class="scanner-box">
-
-            <h2>📷 Scan Schedule</h2>
-
-            <p>
-                Scan your school's QR code to automatically
-                import your classes.
-            </p>
-
-            <div id="reader"></div>
-
-            <div class="scan-status" id="scanStatus">
-                Ready to scan 💗
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- NOTIFICATIONS -->
-
-    <main id="notifications" class="page">
-
-        <div class="schedule-header">
-
-            <h2>🔔 Notifications</h2>
-
-        </div>
-
-        <div class="notification-card">
-
-            <strong>📚 Class Reminder</strong>
-
-            <p>
-                Your next class will appear here.
-            </p>
-
-        </div>
-
-        <div class="notification-card">
-
-            <strong>💗 Schedule Updated</strong>
-
-            <p>
-                Your schedule is automatically saved on this device.
-            </p>
-
-        </div>
+        <p id="homeText">
+            Scan your school QR code to add your classes.
+        </p>
 
         <button
-            class="main-btn"
-            onclick="enableNotifications()"
+            class="primary"
+            onclick="goToScan()"
         >
-            🔔 Enable Browser Notifications
+            Scan Schedule
         </button>
 
-    </main>
-
-
-    <!-- PROFILE -->
-
-    <main id="profile" class="page">
-
-        <div class="profile">
-
-            <div class="avatar">
-                👩‍🎓
-            </div>
-
-            <h2 id="profileName"></h2>
-
-            <p>Student</p>
-
-            <button
-                class="logout"
-                onclick="logout()"
-            >
-                🚪 Logout
-            </button>
-
-        </div>
-
-    </main>
-
-
-    <!-- NAVIGATION -->
-
-    <nav class="bottom-nav">
-
-        <div class="nav-inner">
-
-            <button
-                class="nav-btn active"
-                onclick="openPage('home', this)"
-            >
-                <span>🏠</span>
-                Home
-            </button>
-
-            <button
-                class="nav-btn"
-                onclick="openPage('schedulePage', this)"
-            >
-                <span>📚</span>
-                Schedule
-            </button>
-
-            <button
-                class="nav-btn"
-                onclick="openPage('scan', this)"
-            >
-                <span>📷</span>
-                Scan
-            </button>
-
-            <button
-                class="nav-btn"
-                onclick="openPage('notifications', this)"
-            >
-                <span>🔔</span>
-                Alerts
-            </button>
-
-            <button
-                class="nav-btn"
-                onclick="openPage('profile', this)"
-            >
-                <span>👤</span>
-                Profile
-            </button>
-
-        </div>
-
-    </nav>
+    </div>
 
 </section>
 
 
-<div class="toast" id="toast"></div>
+<!-- SCHEDULE -->
+
+<section id="schedulePage" class="page">
+
+    <h2 class="page-title">My Schedule</h2>
+
+    <input
+        id="searchInput"
+        class="search"
+        type="text"
+        placeholder="Search subject or teacher..."
+        oninput="searchClasses()"
+    >
+
+    <div class="week">
+
+        <div class="day" data-day="Monday">
+            <h3>MONDAY</h3>
+            <div class="classes"></div>
+        </div>
+
+        <div class="day" data-day="Tuesday">
+            <h3>TUESDAY</h3>
+            <div class="classes"></div>
+        </div>
+
+        <div class="day" data-day="Wednesday">
+            <h3>WEDNESDAY</h3>
+            <div class="classes"></div>
+        </div>
+
+        <div class="day" data-day="Thursday">
+            <h3>THURSDAY</h3>
+            <div class="classes"></div>
+        </div>
+
+        <div class="day" data-day="Friday">
+            <h3>FRIDAY</h3>
+            <div class="classes"></div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SCAN -->
+
+<section id="scanPage" class="page">
+
+    <div class="scanner-card">
+
+        <h2>Scan Schedule</h2>
+
+        <p>
+            Tap the button and point your camera at the QR code.
+        </p>
+
+        <button
+            id="startScanButton"
+            class="primary"
+            onclick="startScanner()"
+        >
+            📷 Ready to Scan
+        </button>
+
+        <div id="camera">
+
+            <video
+                id="video"
+                autoplay
+                muted
+                playsinline
+            ></video>
+
+        </div>
+
+        <div
+            id="scanStatus"
+            class="status"
+        >
+            Ready to scan ♡
+        </div>
+
+        <button
+            id="stopScanButton"
+            class="secondary"
+            style="display:none"
+            onclick="stopScanner()"
+        >
+            Stop Camera
+        </button>
+
+        <button
+            class="secondary"
+            onclick="toggleManual()"
+        >
+            Enter QR Text Manually
+        </button>
+
+        <div
+            id="manualBox"
+            class="manual-box"
+        >
+
+            <textarea
+                id="manualText"
+                placeholder="Paste your QR schedule here..."
+            ></textarea>
+
+            <button
+                class="primary"
+                onclick="importSchedule(document.getElementById('manualText').value)"
+            >
+                Add Schedule
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ALERTS -->
+
+<section id="alertsPage" class="page">
+
+    <h2 class="page-title">Notifications</h2>
+
+    <div class="alert-card">
+
+        <strong>♡ Schedule reminders</strong>
+
+        <p id="alertMessage">
+            No reminders yet.
+        </p>
+
+    </div>
+
+    <button
+        class="primary"
+        onclick="testNotification()"
+    >
+        🔔 Enable / Test Notifications
+    </button>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profilePage" class="page">
+
+    <div class="profile-card">
+
+        <div class="avatar">♡</div>
+
+        <h2 id="profileName"></h2>
+
+        <p>Student</p>
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Log out
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- BOTTOM NAV -->
+
+<nav>
+
+    <div class="nav">
+
+        <button
+            class="active"
+            onclick="openPage('homePage', this)"
+        >
+            <span>⌂</span>
+            Home
+        </button>
+
+        <button
+            onclick="openPage('schedulePage', this)"
+        >
+            <span>▦</span>
+            Schedule
+        </button>
+
+        <button
+            onclick="openPage('scanPage', this)"
+        >
+            <span>⌾</span>
+            Scan
+        </button>
+
+        <button
+            onclick="openPage('alertsPage', this)"
+        >
+            <span>♡</span>
+            Alerts
+        </button>
+
+        <button
+            onclick="openPage('profilePage', this)"
+        >
+            <span>○</span>
+            Profile
+        </button>
+
+    </div>
+
+</nav>
+
+</section>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
 /* =========================
-   DEFAULT SCHEDULE
+   EMPTY DEFAULT SCHEDULE
 ========================= */
 
-const defaultSchedule = {
-
-    Monday: [
-        ["7:30 AM - 8:30 AM", "Mathematics", "Mr. Santos", "Room 201"],
-        ["8:30 AM - 9:30 AM", "English", "Ms. Reyes", "Room 203"],
-        ["10:00 AM - 11:00 AM", "Programming", "Mr. Cruz", "Computer Lab"]
-    ],
-
-    Tuesday: [
-        ["7:30 AM - 8:30 AM", "Science", "Ms. Garcia", "Room 202"],
-        ["9:00 AM - 10:00 AM", "Philosophy", "Mr. Lopez", "Room 204"],
-        ["1:00 PM - 2:00 PM", "Research", "Ms. Santos", "Room 205"]
-    ],
-
-    Wednesday: [
-        ["7:30 AM - 8:30 AM", "Programming", "Mr. Cruz", "Computer Lab"],
-        ["9:00 AM - 10:00 AM", "Mathematics", "Mr. Santos", "Room 201"],
-        ["10:30 AM - 11:30 AM", "PE", "Coach Mark", "Gym"]
-    ],
-
-    Thursday: [
-        ["8:00 AM - 9:00 AM", "English", "Ms. Reyes", "Room 203"],
-        ["10:00 AM - 11:00 AM", "Science", "Ms. Garcia", "Room 202"],
-        ["1:00 PM - 2:00 PM", "Research", "Ms. Santos", "Room 205"]
-    ],
-
-    Friday: [
-        ["7:30 AM - 8:30 AM", "Philosophy", "Mr. Lopez", "Room 204"],
-        ["9:00 AM - 10:00 AM", "Programming", "Mr. Cruz", "Computer Lab"],
-        ["10:30 AM - 11:30 AM", "PE", "Coach Mark", "Gym"]
-    ]
+let schedule = {
+    Monday: [],
+    Tuesday: [],
+    Wednesday: [],
+    Thursday: [],
+    Friday: []
 };
+
+let cameraStream = null;
+let detector = null;
+let scanTimer = null;
+let scanning = false;
 
 
 /* =========================
@@ -811,14 +857,19 @@ function login() {
 
     const name =
         document.getElementById("nameInput")
-        .value.trim();
+        .value
+        .trim();
 
     if (!name) {
-        showToast("Please enter your name 💗");
+
+        showToast("Please enter your name ♡");
         return;
     }
 
-    localStorage.setItem("studentName", name);
+    localStorage.setItem(
+        "studentName",
+        name
+    );
 
     showApp();
 }
@@ -831,11 +882,17 @@ function showApp() {
 
     if (!name) return;
 
-    document.getElementById("login").style.display = "none";
-    document.getElementById("app").style.display = "block";
+    document.getElementById("loginPage")
+        .style.display = "none";
 
-    document.getElementById("welcomeName").textContent = name;
-    document.getElementById("profileName").textContent = name;
+    document.getElementById("app")
+        .style.display = "block";
+
+    document.getElementById("welcomeName")
+        .textContent = name;
+
+    document.getElementById("profileName")
+        .textContent = name;
 
     loadSchedule();
 }
@@ -843,77 +900,143 @@ function showApp() {
 
 function logout() {
 
+    stopScanner();
+
     localStorage.removeItem("studentName");
 
-    document.getElementById("app").style.display = "none";
-    document.getElementById("login").style.display = "flex";
-
-    document.getElementById("nameInput").value = "";
+    location.reload();
 }
 
 
+/* ENTER KEY LOGIN */
+
+document
+    .getElementById("nameInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            login();
+        }
+
+    });
+
+
 /* =========================
-   PAGE NAVIGATION
+   NAVIGATION
 ========================= */
 
 function openPage(pageId, button) {
 
+    stopScanner();
+
     document.querySelectorAll(".page")
-        .forEach(page => page.classList.remove("active"));
+        .forEach(page => {
+            page.classList.remove("active");
+        });
 
     document.getElementById(pageId)
         .classList.add("active");
 
-    document.querySelectorAll(".nav-btn")
-        .forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".nav button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
 
     button.classList.add("active");
 }
 
 
-/* =========================
-   SCHEDULE
-========================= */
+function goToScan() {
 
-function getSchedule() {
+    const buttons =
+        document.querySelectorAll(".nav button");
 
-    const saved =
-        localStorage.getItem("schedule");
+    openPage("scanPage", buttons[2]);
 
-    if (saved) {
-        return JSON.parse(saved);
-    }
-
-    return defaultSchedule;
+    startScanner();
 }
 
 
-function saveSchedule(schedule) {
+/* =========================
+   SCHEDULE STORAGE
+========================= */
+
+function loadSchedule() {
+
+    const saved =
+        localStorage.getItem("pinkSchedule");
+
+    if (saved) {
+
+        try {
+
+            const parsed =
+                JSON.parse(saved);
+
+            if (
+                parsed &&
+                typeof parsed === "object"
+            ) {
+                schedule = parsed;
+            }
+
+        } catch (error) {
+
+            schedule = {
+                Monday: [],
+                Tuesday: [],
+                Wednesday: [],
+                Thursday: [],
+                Friday: []
+            };
+        }
+    }
+
+    renderSchedule();
+}
+
+
+function saveSchedule() {
 
     localStorage.setItem(
-        "schedule",
+        "pinkSchedule",
         JSON.stringify(schedule)
     );
 }
 
 
-function loadSchedule() {
+/* =========================
+   DISPLAY SCHEDULE
+========================= */
 
-    const schedule = getSchedule();
+function renderSchedule() {
 
     document.querySelectorAll(".classes")
-        .forEach(box => box.innerHTML = "");
+        .forEach(box => {
+            box.innerHTML = "";
+        });
 
     let total = 0;
 
     for (const day in schedule) {
 
-        const dayBox =
+        const box =
             document.querySelector(
                 `.day[data-day="${day}"] .classes`
             );
 
-        if (!dayBox) continue;
+        if (!box) continue;
+
+        if (
+            !Array.isArray(schedule[day]) ||
+            schedule[day].length === 0
+        ) {
+
+            box.innerHTML =
+                `<div class="no-class">No classes</div>`;
+
+            continue;
+        }
 
         schedule[day].forEach(item => {
 
@@ -925,19 +1048,49 @@ function loadSchedule() {
             div.className = "class-item";
 
             div.innerHTML = `
-                <div class="time">${item[0]}</div>
-                <strong>${item[1]}</strong>
-                <small>${item[2]} • ${item[3]}</small>
+                <div class="time">
+                    ${escapeHTML(item.time)}
+                </div>
+
+                <strong>
+                    ${escapeHTML(item.subject)}
+                </strong>
+
+                <small>
+                    ${escapeHTML(item.teacher || "")}
+                    ${
+                        item.room
+                        ? " • " + escapeHTML(item.room)
+                        : ""
+                    }
+                </small>
             `;
 
-            dayBox.appendChild(div);
+            box.appendChild(div);
 
         });
-
     }
 
-    document.getElementById("totalClasses")
-        .textContent = total;
+    if (total === 0) {
+
+        document.getElementById("homeTitle")
+            .textContent =
+            "Your schedule is empty";
+
+        document.getElementById("homeText")
+            .textContent =
+            "Scan your school QR code to add your classes.";
+
+    } else {
+
+        document.getElementById("homeTitle")
+            .textContent =
+            total + " classes this week";
+
+        document.getElementById("homeText")
+            .textContent =
+            "Your schedule is saved on this device.";
+    }
 }
 
 
@@ -948,8 +1101,10 @@ function loadSchedule() {
 function searchClasses() {
 
     const query =
-        document.getElementById("search")
-        .value.toLowerCase();
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
     document.querySelectorAll(".class-item")
         .forEach(item => {
@@ -969,132 +1124,287 @@ function searchClasses() {
    QR SCANNER
 ========================= */
 
-let scanner = null;
+async function startScanner() {
 
-function startScanner() {
+    if (scanning) return;
 
-    if (scanner) return;
+    const status =
+        document.getElementById("scanStatus");
 
-    scanner =
-        new Html5Qrcode("reader");
+    const camera =
+        document.getElementById("camera");
 
-    scanner.start(
+    const video =
+        document.getElementById("video");
 
-        {
-            facingMode: "environment"
-        },
+    if (!navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia) {
 
-        {
-            fps: 10,
-            qrbox: {
-                width: 250,
-                height: 250
-            }
-        },
+        status.textContent =
+            "Camera is not available here.";
 
-        function(decodedText) {
+        showManual();
 
-            processQR(decodedText);
+        return;
+    }
 
-        },
+    if (!("BarcodeDetector" in window)) {
 
-        function(error) {}
+        status.textContent =
+            "Automatic QR scanning is not supported by this browser.";
 
-    ).catch(function(error) {
+        showManual();
 
-        document.getElementById("scanStatus")
-            .textContent =
-            "Camera permission is required 📷";
+        return;
+    }
 
-    });
+    try {
+
+        detector =
+            new BarcodeDetector({
+                formats: ["qr_code"]
+            });
+
+        cameraStream =
+            await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: {
+                        ideal: "environment"
+                    }
+                },
+                audio: false
+            });
+
+        video.srcObject = cameraStream;
+
+        camera.style.display = "block";
+
+        document.getElementById("startScanButton")
+            .style.display = "none";
+
+        document.getElementById("stopScanButton")
+            .style.display = "block";
+
+        await video.play();
+
+        scanning = true;
+
+        status.textContent =
+            "Scanning automatically ♡";
+
+        scanLoop();
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "Please allow camera access.";
+
+        showToast(
+            "Camera permission is required ♡"
+        );
+    }
 }
 
 
-/*
-QR FORMAT:
+async function scanLoop() {
 
-MONDAY|7:30 AM - 8:30 AM|Mathematics|Mr. Santos|Room 201
-TUESDAY|9:00 AM - 10:00 AM|Science|Ms. Garcia|Room 202
-WEDNESDAY|10:00 AM - 11:00 AM|Programming|Mr. Cruz|Computer Lab
+    if (!scanning) return;
+
+    const video =
+        document.getElementById("video");
+
+    try {
+
+        if (
+            video.readyState >= 2 &&
+            detector
+        ) {
+
+            const codes =
+                await detector.detect(video);
+
+            if (codes.length > 0) {
+
+                importSchedule(
+                    codes[0].rawValue
+                );
+
+                return;
+            }
+        }
+
+    } catch (error) {
+
+        console.log(error);
+    }
+
+    scanTimer =
+        setTimeout(scanLoop, 300);
+}
+
+
+function stopScanner() {
+
+    scanning = false;
+
+    if (scanTimer) {
+
+        clearTimeout(scanTimer);
+        scanTimer = null;
+    }
+
+    if (cameraStream) {
+
+        cameraStream
+            .getTracks()
+            .forEach(track => {
+                track.stop();
+            });
+
+        cameraStream = null;
+    }
+
+    const video =
+        document.getElementById("video");
+
+    if (video) {
+        video.srcObject = null;
+    }
+
+    const camera =
+        document.getElementById("camera");
+
+    if (camera) {
+        camera.style.display = "none";
+    }
+
+    const startButton =
+        document.getElementById("startScanButton");
+
+    if (startButton) {
+        startButton.style.display = "block";
+    }
+
+    const stopButton =
+        document.getElementById("stopScanButton");
+
+    if (stopButton) {
+        stopButton.style.display = "none";
+    }
+}
+
+
+/* =========================
+   IMPORT QR SCHEDULE
+========================= */
+
+/*
+QR CODE FORMAT:
+
+Monday|7:30 AM - 8:30 AM|Mathematics|Mr. Santos|Room 201
+Tuesday|9:00 AM - 10:00 AM|Science|Ms. Garcia|Room 202
+Wednesday|10:00 AM - 11:00 AM|Programming|Mr. Cruz|Computer Lab
 */
 
-function processQR(data) {
+function importSchedule(text) {
 
     const lines =
-        data.split("\n");
-
-    const schedule = getSchedule();
+        String(text)
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(Boolean);
 
     let added = 0;
 
     lines.forEach(line => {
 
         const parts =
-            line.split("|");
+            line
+            .split("|")
+            .map(part => part.trim());
 
-        if (parts.length < 5) return;
+        if (parts.length < 4) return;
 
-        const day = parts[0].trim();
+        const day = parts[0];
 
         if (!schedule[day]) return;
 
-        const classData = [
+        schedule[day].push({
 
-            parts[1].trim(),
-            parts[2].trim(),
-            parts[3].trim(),
-            parts[4].trim()
+            time: parts[1],
 
-        ];
+            subject: parts[2],
 
-        schedule[day].push(classData);
+            teacher: parts[3],
+
+            room: parts[4] || ""
+
+        });
 
         added++;
-
     });
 
+    if (added === 0) {
 
-    if (added > 0) {
-
-        saveSchedule(schedule);
-        loadSchedule();
+        showToast(
+            "QR code format not recognized."
+        );
 
         document.getElementById("scanStatus")
             .textContent =
-            `✨ ${added} class(es) added successfully!`;
+            "That QR code does not contain a schedule.";
 
-        showToast(
-            `${added} classes added to your schedule 💗`
-        );
-
-    } else {
-
-        document.getElementById("scanStatus")
-            .textContent =
-            "QR format not recognized.";
-
-        showToast(
-            "The QR code doesn't contain a valid schedule."
-        );
+        return;
     }
+
+    saveSchedule();
+
+    renderSchedule();
+
+    stopScanner();
+
+    document.getElementById("scanStatus")
+        .textContent =
+        "Schedule imported successfully ♡";
+
+    showToast(
+        added +
+        (added === 1
+            ? " class added ♡"
+            : " classes added ♡")
+    );
+
+    const buttons =
+        document.querySelectorAll(".nav button");
+
+    openPage("schedulePage", buttons[1]);
 }
 
 
 /* =========================
-   START SCANNER
+   MANUAL INPUT
 ========================= */
 
-function startWhenScanPageOpens() {
+function toggleManual() {
 
-    const scanPage =
-        document.getElementById("scan");
+    const box =
+        document.getElementById("manualBox");
 
-    if (
-        scanPage.classList.contains("active")
-        && !scanner
-    ) {
-        startScanner();
-    }
+    box.style.display =
+        box.style.display === "block"
+        ? "none"
+        : "block";
+}
+
+
+function showManual() {
+
+    const box =
+        document.getElementById("manualBox");
+
+    box.style.display = "block";
 }
 
 
@@ -1106,20 +1416,18 @@ function toggleTheme() {
 
     document.body.classList.toggle("dark");
 
-    const dark =
-        document.body.classList.contains("dark");
-
     localStorage.setItem(
-        "darkMode",
-        dark
+        "pinkDark",
+        document.body.classList.contains("dark")
     );
 }
 
 
 if (
-    localStorage.getItem("darkMode")
+    localStorage.getItem("pinkDark")
     === "true"
 ) {
+
     document.body.classList.add("dark");
 }
 
@@ -1128,43 +1436,48 @@ if (
    NOTIFICATIONS
 ========================= */
 
-function enableNotifications() {
+async function testNotification() {
+
+    const alertMessage =
+        document.getElementById("alertMessage");
+
+    alertMessage.textContent =
+        "Notifications are ready to use on this device ♡";
+
+    showToast(
+        "Notification button works ♡"
+    );
 
     if (!("Notification" in window)) {
-
-        showToast(
-            "Your browser does not support notifications."
-        );
-
         return;
     }
 
-    Notification.requestPermission()
-        .then(permission => {
+    try {
 
-            if (permission === "granted") {
+        let permission =
+            Notification.permission;
 
-                new Notification(
-                    "Pink Schedule 💗",
-                    {
-                        body:
-                        "Notifications are now enabled!"
-                    }
-                );
+        if (permission === "default") {
 
-                showToast(
-                    "Notifications enabled 🔔"
-                );
+            permission =
+                await Notification.requestPermission();
+        }
 
-            } else {
+        if (permission === "granted") {
 
-                showToast(
-                    "Notification permission was denied."
-                );
+            new Notification(
+                "Pink Schedule ♡",
+                {
+                    body:
+                    "Your notification system is working."
+                }
+            );
+        }
 
-            }
+    } catch (error) {
 
-        });
+        console.log(error);
+    }
 }
 
 
@@ -1178,6 +1491,7 @@ function showToast(message) {
         document.getElementById("toast");
 
     toast.textContent = message;
+
     toast.style.display = "block";
 
     setTimeout(() => {
@@ -1189,32 +1503,32 @@ function showToast(message) {
 
 
 /* =========================
-   AUTO LOGIN
+   SECURITY
+========================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================
+   START APP
 ========================= */
 
 if (
     localStorage.getItem("studentName")
 ) {
+
     showApp();
 }
-
-
-/* =========================
-   NAVIGATION WATCHER
-========================= */
-
-document.querySelectorAll(".nav-btn")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            startWhenScanPageOpens
-        );
-
-    });
 
 </script>
 
 </body>
 </html>
-```
