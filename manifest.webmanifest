@@ -1,0 +1,10 @@
+{
+  "name": "Pink Schedule",
+  "short_name": "Pink Schedule",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff2f7",
+  "theme_color": "#f47aaa",
+  "description": "Minimal student schedule app",
+  "icons": []
+}
