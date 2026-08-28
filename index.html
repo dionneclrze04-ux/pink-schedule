@@ -1,507 +1,601 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f47aaa">
-<meta name="description" content="Minimal Pink Schedule App">
-
-<link rel="manifest" href="manifest.webmanifest">
 
 <title>Pink Schedule</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
 
-:root {
-    --pink: #f47aaa;
-    --pink-light: #fff2f7;
-    --white: #ffffff;
-    --text: #333333;
-    --gray: #999999;
-    --border: #f3d4e1;
-    --soft: #fff8fb;
+:root{
+    --pink:#f47aaa;
+    --pink-dark:#df5f95;
+    --light:#fff2f7;
+    --white:#ffffff;
+    --text:#333;
+    --gray:#999;
+    --border:#f2d4e1;
+    --danger:#e56b7f;
 }
 
-body.dark {
-    --pink: #ff88b5;
-    --pink-light: #1b1619;
-    --white: #272126;
-    --text: #ffffff;
-    --gray: #aaaaaa;
-    --border: #49333e;
-    --soft: #30272d;
+body{
+    background:var(--light);
+    color:var(--text);
+    min-height:100vh;
 }
 
-body {
-    background: var(--pink-light);
-    color: var(--text);
-    min-height: 100vh;
+body.dark{
+    --light:#181418;
+    --white:#261f25;
+    --text:#fff;
+    --gray:#aaa;
+    --border:#4d3541;
 }
 
 /* =========================
    LOGIN
 ========================= */
 
-#loginPage {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.login-card {
-    width: 100%;
-    max-width: 370px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 26px;
-    padding: 34px 24px;
-    text-align: center;
-    box-shadow: 0 12px 35px rgba(244, 122, 170, 0.12);
+.login-box{
+    width:100%;
+    max-width:390px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:30px 24px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(244,122,170,.12);
 }
 
-.logo {
-    width: 68px;
-    height: 68px;
-    margin: auto;
-    border-radius: 21px;
-    background: var(--pink);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 31px;
+.logo{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:21px;
+    background:var(--pink);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:31px;
 }
 
-.login-card h1 {
-    color: var(--pink);
-    font-size: 25px;
-    margin-top: 15px;
+.login-box h1{
+    color:var(--pink);
+    margin-top:15px;
 }
 
-.login-card p {
-    color: var(--gray);
-    font-size: 14px;
-    margin: 8px 0 22px;
+.login-box p{
+    color:var(--gray);
+    font-size:14px;
+    margin:8px 0 20px;
 }
-
-/* =========================
-   INPUTS / BUTTONS
-========================= */
 
 input,
-textarea {
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--white);
-    color: var(--text);
-    outline: none;
-}
-
-input {
-    padding: 14px;
-}
-
-textarea {
-    padding: 13px;
-    resize: vertical;
-    min-height: 120px;
+select{
+    width:100%;
+    padding:13px;
+    margin-bottom:10px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    background:var(--white);
+    color:var(--text);
+    outline:none;
 }
 
 input:focus,
-textarea:focus {
-    border-color: var(--pink);
+select:focus{
+    border-color:var(--pink);
 }
 
-button {
-    cursor: pointer;
+button{
+    border:none;
+    cursor:pointer;
 }
 
-.primary {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: var(--pink);
-    color: white;
-    font-weight: bold;
+.primary{
+    width:100%;
+    padding:13px;
+    border-radius:11px;
+    background:var(--pink);
+    color:#fff;
+    font-weight:bold;
 }
 
-.secondary {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background: var(--pink-light);
-    color: var(--pink);
-    font-weight: bold;
+.google{
+    width:100%;
+    padding:13px;
+    border-radius:11px;
+    background:var(--white);
+    color:var(--text);
+    border:1px solid var(--border);
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.divider{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--gray);
+    font-size:12px;
+    margin:12px 0;
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+    height:1px;
+    flex:1;
+    background:var(--border);
+}
+
+.login-links{
+    display:flex;
+    justify-content:space-between;
+    margin-top:12px;
+}
+
+.text-btn{
+    background:none;
+    color:var(--pink);
+    font-size:12px;
+    font-weight:bold;
 }
 
 /* =========================
    APP
 ========================= */
 
-#app {
-    display: none;
-    min-height: 100vh;
-    padding-bottom: 78px;
+#app{
+    display:none;
+    min-height:100vh;
+    padding-bottom:80px;
 }
 
-header {
-    height: 65px;
-    padding: 0 20px;
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+header{
+    height:65px;
+    padding:0 20px;
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
-header h2 {
-    color: var(--pink);
-    font-size: 19px;
+header h2{
+    color:var(--pink);
+    font-size:19px;
 }
 
-.theme-btn {
-    width: 39px;
-    height: 39px;
-    border: none;
-    border-radius: 11px;
-    background: var(--pink-light);
-    color: var(--pink);
-    font-size: 18px;
+.theme{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:var(--light);
+    color:var(--pink);
+    font-size:17px;
 }
 
 /* =========================
    PAGES
 ========================= */
 
-.page {
-    display: none;
-    width: 92%;
-    max-width: 1000px;
-    margin: 25px auto;
+.page{
+    display:none;
+    width:92%;
+    max-width:1000px;
+    margin:25px auto;
 }
 
-.page.active {
-    display: block;
+.page.active{
+    display:block;
 }
 
 /* =========================
    HOME
 ========================= */
 
-.welcome {
-    background: var(--pink);
-    color: white;
-    padding: 25px;
-    border-radius: 21px;
-    margin-bottom: 18px;
+.welcome{
+    background:var(--pink);
+    color:white;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:18px;
 }
 
-.welcome small {
-    opacity: 0.82;
+.welcome h1{
+    margin:6px 0;
 }
 
-.welcome h1 {
-    margin: 7px 0;
-    font-size: 25px;
+.home-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
 }
 
-.empty-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 21px;
-    padding: 40px 22px;
-    text-align: center;
+.home-card h2{
+    color:var(--pink);
 }
 
-.empty-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
+.home-card p{
+    color:var(--gray);
+    font-size:14px;
+    margin-top:7px;
 }
 
-.empty-card h2 {
-    color: var(--pink);
-    font-size: 20px;
+.home-buttons{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.empty-card p {
-    color: var(--gray);
-    font-size: 14px;
-    margin: 8px 0 20px;
+.secondary{
+    padding:13px;
+    border-radius:11px;
+    background:var(--light);
+    color:var(--pink);
+    font-weight:bold;
 }
 
 /* =========================
    SCHEDULE
 ========================= */
 
-.page-title {
-    color: var(--pink);
-    margin-bottom: 15px;
+.title{
+    color:var(--pink);
+    margin-bottom:15px;
 }
 
-.search {
-    margin-bottom: 16px;
+.search{
+    margin-bottom:15px;
 }
 
-.week {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+.week{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
 }
 
-.day {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 13px;
-    min-height: 220px;
+.day{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:13px;
+    min-height:260px;
 }
 
-.day h3 {
-    color: var(--pink);
-    font-size: 13px;
-    text-align: center;
-    margin-bottom: 12px;
+.day-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
 }
 
-.class-item {
-    background: var(--soft);
-    border-left: 3px solid var(--pink);
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 8px;
+.day-title h3{
+    color:var(--pink);
+    font-size:13px;
 }
 
-.class-item .time {
-    color: var(--pink);
-    font-size: 10px;
-    font-weight: bold;
+.add-day{
+    width:28px;
+    height:28px;
+    border-radius:8px;
+    background:var(--light);
+    color:var(--pink);
+    font-size:18px;
 }
 
-.class-item strong {
-    display: block;
-    margin: 4px 0;
-    font-size: 13px;
+.class-item{
+    background:var(--light);
+    border-left:3px solid var(--pink);
+    border-radius:10px;
+    padding:10px;
+    margin-bottom:8px;
 }
 
-.class-item small {
-    color: var(--gray);
-    font-size: 10px;
+.class-item .time{
+    color:var(--pink);
+    font-size:10px;
+    font-weight:bold;
 }
 
-.no-class {
-    color: #b8b8b8;
-    text-align: center;
-    padding-top: 28px;
-    font-size: 12px;
+.class-item strong{
+    display:block;
+    font-size:13px;
+    margin:4px 0;
 }
 
-/* =========================
-   SCANNER
-========================= */
-
-.scanner-card {
-    width: 100%;
-    max-width: 450px;
-    margin: auto;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 21px;
-    padding: 23px;
-    text-align: center;
+.class-item small{
+    display:block;
+    color:var(--gray);
+    font-size:10px;
 }
 
-.scanner-card h2 {
-    color: var(--pink);
-    margin-bottom: 7px;
+.class-actions{
+    display:flex;
+    gap:5px;
+    margin-top:8px;
 }
 
-.scanner-card p {
-    color: var(--gray);
-    font-size: 13px;
-    margin-bottom: 16px;
+.edit-btn,
+.delete-btn{
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:10px;
+    font-weight:bold;
 }
 
-#camera {
-    display: none;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #111;
-    margin-top: 15px;
+.edit-btn{
+    background:white;
+    color:var(--pink);
 }
 
-#video {
-    width: 100%;
-    display: block;
+.delete-btn{
+    background:white;
+    color:var(--danger);
 }
 
-.status {
-    color: var(--pink);
-    font-size: 13px;
-    margin: 13px 0;
-}
-
-.manual-box {
-    display: none;
-    margin-top: 14px;
-}
-
-.manual-box textarea {
-    margin-bottom: 10px;
+.empty-day{
+    text-align:center;
+    color:#bbb;
+    font-size:12px;
+    padding-top:30px;
 }
 
 /* =========================
-   ALERTS
+   EDITOR
 ========================= */
 
-.alert-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 17px;
-    padding: 18px;
-    margin-bottom: 12px;
+.editor{
+    max-width:500px;
+    margin:auto;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px;
 }
 
-.alert-card strong {
-    color: var(--pink);
+.editor h2{
+    color:var(--pink);
+    margin-bottom:7px;
 }
 
-.alert-card p {
-    color: var(--gray);
-    font-size: 13px;
-    margin-top: 5px;
+.editor p{
+    color:var(--gray);
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.form-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.form-buttons button{
+    flex:1;
+    padding:13px;
+    border-radius:11px;
+    font-weight:bold;
+}
+
+.cancel{
+    background:var(--light);
+    color:var(--pink);
+}
+
+.save{
+    background:var(--pink);
+    color:white;
 }
 
 /* =========================
    PROFILE
 ========================= */
 
-.profile-card {
-    max-width: 400px;
-    margin: auto;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 21px;
-    padding: 30px;
-    text-align: center;
+.profile{
+    max-width:420px;
+    margin:auto;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:28px;
+    text-align:center;
 }
 
-.avatar {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    margin: auto;
-    background: var(--pink);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
+.avatar{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:var(--pink);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-size:30px;
 }
 
-.profile-card h2 {
-    color: var(--pink);
-    margin-top: 12px;
+.profile h2{
+    color:var(--pink);
+    margin-top:12px;
 }
 
-.profile-card p {
-    color: var(--gray);
-    margin-top: 4px;
+.profile p{
+    color:var(--gray);
+    margin:5px 0 20px;
 }
 
-.logout-btn {
-    margin-top: 20px;
-    padding: 11px 20px;
-    border: none;
-    border-radius: 10px;
-    background: #eeeeee;
-    color: #555;
+.logout,
+.reset-pin{
+    padding:11px 18px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.logout{
+    background:#eee;
+    color:#555;
+}
+
+.reset-pin{
+    background:var(--light);
+    color:var(--pink);
+    margin-right:5px;
 }
 
 /* =========================
-   NAVIGATION
+   NAV
 ========================= */
 
-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 70px;
-    background: var(--white);
-    border-top: 1px solid var(--border);
-    z-index: 20;
+nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:70px;
+    background:var(--white);
+    border-top:1px solid var(--border);
+    z-index:20;
 }
 
-.nav {
-    max-width: 620px;
-    height: 100%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+.nav{
+    height:100%;
+    max-width:650px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
 }
 
-.nav button {
-    border: none;
-    background: transparent;
-    color: var(--gray);
-    font-size: 10px;
+.nav button{
+    background:transparent;
+    color:var(--gray);
+    font-size:10px;
 }
 
-.nav button span {
-    display: block;
-    font-size: 20px;
-    margin-bottom: 3px;
+.nav button span{
+    display:block;
+    font-size:20px;
+    margin-bottom:3px;
 }
 
-.nav button.active {
-    color: var(--pink);
+.nav button.active{
+    color:var(--pink);
+}
+
+/* =========================
+   PIN MODAL
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:100;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:360px;
+    background:var(--white);
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+}
+
+.modal-box h2{
+    color:var(--pink);
+    margin-bottom:7px;
+}
+
+.modal-box p{
+    color:var(--gray);
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.pin-input{
+    text-align:center;
+    letter-spacing:8px;
+    font-size:22px;
+}
+
+.close-btn{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border-radius:10px;
+    background:var(--light);
+    color:var(--pink);
 }
 
 /* =========================
    TOAST
 ========================= */
 
-.toast {
-    display: none;
-    position: fixed;
-    left: 50%;
-    bottom: 90px;
-    transform: translateX(-50%);
-    z-index: 100;
-    background: var(--white);
-    color: var(--text);
-    border-left: 4px solid var(--pink);
-    border-radius: 12px;
-    padding: 13px 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.15);
-    white-space: nowrap;
+.toast{
+    display:none;
+    position:fixed;
+    left:50%;
+    bottom:90px;
+    transform:translateX(-50%);
+    background:var(--white);
+    color:var(--text);
+    border-left:4px solid var(--pink);
+    padding:13px 18px;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    z-index:200;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media (max-width: 800px) {
-    .week {
-        grid-template-columns: 1fr;
+@media(max-width:850px){
+    .week{
+        grid-template-columns:1fr;
     }
 
-    .day {
-        min-height: 120px;
+    .day{
+        min-height:120px;
+    }
+}
+
+@media(max-width:450px){
+    .home-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .login-links{
+        flex-direction:column;
+        gap:10px;
     }
 }
 </style>
@@ -510,34 +604,60 @@ nav {
 <body>
 
 <!-- =========================
-     LOGIN
+     LOGIN PAGE
 ========================= -->
 
 <section id="loginPage">
 
-    <div class="login-card">
+<div class="login-box">
 
-        <div class="logo">♡</div>
+    <div class="logo">♡</div>
 
-        <h1>Pink Schedule</h1>
+    <h1>Pink Schedule</h1>
 
-        <p>Simple. Pretty. Organized.</p>
+    <p>Your classes. Your schedule. Your way.</p>
 
-        <input
-            id="nameInput"
-            type="text"
-            placeholder="Student name"
-            autocomplete="name"
-        >
+    <button
+        class="google"
+        onclick="signInGoogle()">
+        G Continue with Google
+    </button>
+
+    <div class="divider">or</div>
+
+    <input
+        id="email"
+        type="email"
+        placeholder="Email">
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Password">
+
+    <button
+        class="primary"
+        onclick="signInEmail()">
+        Sign In
+    </button>
+
+    <div class="login-links">
 
         <button
-            class="primary"
-            onclick="login()"
-        >
-            Continue
+            class="text-btn"
+            onclick="createAccount()">
+            Create Account
+        </button>
+
+        <button
+            class="text-btn"
+            onclick="forgotPassword()">
+            Forgot Password?
         </button>
 
     </div>
+
+</div>
 
 </section>
 
@@ -553,10 +673,8 @@ nav {
     <h2>Pink Schedule ♡</h2>
 
     <button
-        class="theme-btn"
-        onclick="toggleTheme()"
-        aria-label="Toggle theme"
-    >
+        class="theme"
+        onclick="toggleTheme()">
         ☾
     </button>
 
@@ -575,28 +693,34 @@ nav {
             Hi, <span id="welcomeName"></span> ♡
         </h1>
 
-        <p>Your classes in one simple place.</p>
+        <p>Edit your schedule anytime.</p>
 
     </div>
 
-    <div class="empty-card">
+    <div class="home-card">
 
-        <div class="empty-icon">♡</div>
+        <h2>Your Weekly Schedule</h2>
 
-        <h2 id="homeTitle">
-            Your schedule is empty
-        </h2>
-
-        <p id="homeText">
-            Scan your school QR code to add your classes.
+        <p>
+            Add your classes below. Everything is saved
+            on this device for offline use.
         </p>
 
-        <button
-            class="primary"
-            onclick="goToScan()"
-        >
-            Scan Schedule
-        </button>
+        <div class="home-buttons">
+
+            <button
+                class="primary"
+                onclick="goSchedule()">
+                View Schedule
+            </button>
+
+            <button
+                class="secondary"
+                onclick="goAddClass()">
+                + Add Class
+            </button>
+
+        </div>
 
     </div>
 
@@ -607,41 +731,100 @@ nav {
 
 <section id="schedulePage" class="page">
 
-    <h2 class="page-title">My Schedule</h2>
+    <h2 class="title">
+        My Weekly Schedule
+    </h2>
 
     <input
-        id="searchInput"
+        id="search"
         class="search"
-        type="text"
         placeholder="Search subject or teacher..."
-        oninput="searchClasses()"
-    >
+        onkeyup="searchClasses()">
 
     <div class="week">
 
         <div class="day" data-day="Monday">
-            <h3>MONDAY</h3>
+
+            <div class="day-title">
+                <h3>MONDAY</h3>
+
+                <button
+                    class="add-day"
+                    onclick="openEditor('Monday')">
+                    +
+                </button>
+            </div>
+
             <div class="classes"></div>
+
         </div>
+
 
         <div class="day" data-day="Tuesday">
-            <h3>TUESDAY</h3>
+
+            <div class="day-title">
+                <h3>TUESDAY</h3>
+
+                <button
+                    class="add-day"
+                    onclick="openEditor('Tuesday')">
+                    +
+                </button>
+            </div>
+
             <div class="classes"></div>
+
         </div>
+
 
         <div class="day" data-day="Wednesday">
-            <h3>WEDNESDAY</h3>
+
+            <div class="day-title">
+                <h3>WEDNESDAY</h3>
+
+                <button
+                    class="add-day"
+                    onclick="openEditor('Wednesday')">
+                    +
+                </button>
+            </div>
+
             <div class="classes"></div>
+
         </div>
+
 
         <div class="day" data-day="Thursday">
-            <h3>THURSDAY</h3>
+
+            <div class="day-title">
+                <h3>THURSDAY</h3>
+
+                <button
+                    class="add-day"
+                    onclick="openEditor('Thursday')">
+                    +
+                </button>
+            </div>
+
             <div class="classes"></div>
+
         </div>
 
+
         <div class="day" data-day="Friday">
-            <h3>FRIDAY</h3>
+
+            <div class="day-title">
+                <h3>FRIDAY</h3>
+
+                <button
+                    class="add-day"
+                    onclick="openEditor('Friday')">
+                    +
+                </button>
+            </div>
+
             <div class="classes"></div>
+
         </div>
 
     </div>
@@ -649,75 +832,58 @@ nav {
 </section>
 
 
-<!-- SCAN -->
+<!-- EDITOR -->
 
-<section id="scanPage" class="page">
+<section id="editorPage" class="page">
 
-    <div class="scanner-card">
+    <div class="editor">
 
-        <h2>Scan Schedule</h2>
+        <h2 id="editorTitle">
+            Add Class
+        </h2>
 
         <p>
-            Tap the button and point your camera at the QR code.
+            Fill in your class information.
         </p>
 
-        <button
-            id="startScanButton"
-            class="primary"
-            onclick="startScanner()"
-        >
-            📷 Ready to Scan
-        </button>
+        <select id="dayInput">
 
-        <div id="camera">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
 
-            <video
-                id="video"
-                autoplay
-                muted
-                playsinline
-            ></video>
+        </select>
 
-        </div>
+        <input
+            id="timeInput"
+            placeholder="Time">
 
-        <div
-            id="scanStatus"
-            class="status"
-        >
-            Ready to scan ♡
-        </div>
+        <input
+            id="subjectInput"
+            placeholder="Subject">
 
-        <button
-            id="stopScanButton"
-            class="secondary"
-            style="display:none"
-            onclick="stopScanner()"
-        >
-            Stop Camera
-        </button>
+        <input
+            id="teacherInput"
+            placeholder="Teacher">
 
-        <button
-            class="secondary"
-            onclick="toggleManual()"
-        >
-            Enter QR Text Manually
-        </button>
+        <input
+            id="roomInput"
+            placeholder="Room">
 
-        <div
-            id="manualBox"
-            class="manual-box"
-        >
-
-            <textarea
-                id="manualText"
-                placeholder="Paste your QR schedule here..."
-            ></textarea>
+        <div class="form-buttons">
 
             <button
-                class="primary"
-                onclick="importSchedule(document.getElementById('manualText').value)"
-            >
-                Add Schedule
+                class="cancel"
+                onclick="goSchedule()">
+                Cancel
+            </button>
+
+            <button
+                class="save"
+                onclick="saveClass()">
+                Save Class
             </button>
 
         </div>
@@ -727,48 +893,33 @@ nav {
 </section>
 
 
-<!-- ALERTS -->
-
-<section id="alertsPage" class="page">
-
-    <h2 class="page-title">Notifications</h2>
-
-    <div class="alert-card">
-
-        <strong>♡ Schedule reminders</strong>
-
-        <p id="alertMessage">
-            No reminders yet.
-        </p>
-
-    </div>
-
-    <button
-        class="primary"
-        onclick="testNotification()"
-    >
-        🔔 Enable / Test Notifications
-    </button>
-
-</section>
-
-
 <!-- PROFILE -->
 
 <section id="profilePage" class="page">
 
-    <div class="profile-card">
+    <div class="profile">
 
-        <div class="avatar">♡</div>
+        <div class="avatar">
+            ♡
+        </div>
 
-        <h2 id="profileName"></h2>
+        <h2 id="profileName">
+            Student
+        </h2>
 
-        <p>Student</p>
+        <p id="profileEmail">
+            —
+        </p>
 
         <button
-            class="logout-btn"
-            onclick="logout()"
-        >
+            class="reset-pin"
+            onclick="setupPin()">
+            Set / Change PIN
+        </button>
+
+        <button
+            class="logout"
+            onclick="logout()">
             Log out
         </button>
 
@@ -777,217 +928,535 @@ nav {
 </section>
 
 
-<!-- BOTTOM NAV -->
+<!-- NAVIGATION -->
 
 <nav>
 
-    <div class="nav">
+<div class="nav">
 
-        <button
-            class="active"
-            onclick="openPage('homePage', this)"
-        >
-            <span>⌂</span>
-            Home
-        </button>
+    <button
+        class="active"
+        onclick="openPage('homePage',this)">
+        <span>⌂</span>
+        Home
+    </button>
 
-        <button
-            onclick="openPage('schedulePage', this)"
-        >
-            <span>▦</span>
-            Schedule
-        </button>
+    <button
+        onclick="openPage('schedulePage',this)">
+        <span>▦</span>
+        Schedule
+    </button>
 
-        <button
-            onclick="openPage('scanPage', this)"
-        >
-            <span>⌾</span>
-            Scan
-        </button>
+    <button
+        onclick="goAddClass()">
+        <span>＋</span>
+        Add
+    </button>
 
-        <button
-            onclick="openPage('alertsPage', this)"
-        >
-            <span>♡</span>
-            Alerts
-        </button>
+    <button
+        onclick="openPage('profilePage',this)">
+        <span>○</span>
+        Account
+    </button>
 
-        <button
-            onclick="openPage('profilePage', this)"
-        >
-            <span>○</span>
-            Profile
-        </button>
-
-    </div>
+</div>
 
 </nav>
 
 </section>
 
 
+<!-- PIN MODAL -->
+
+<div id="pinModal" class="modal">
+
+    <div class="modal-box">
+
+        <h2>Set Your PIN</h2>
+
+        <p>
+            Create a 4–6 digit PIN for this device.
+        </p>
+
+        <input
+            id="pinInput"
+            class="pin-input"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="••••••">
+
+        <input
+            id="pinConfirm"
+            class="pin-input"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="Confirm PIN">
+
+        <button
+            class="primary"
+            onclick="savePin()">
+            Save PIN
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closePin()">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
 <div id="toast" class="toast"></div>
 
 
-<script>
+<!-- FIREBASE -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 
 /* =========================
-   EMPTY DEFAULT SCHEDULE
+   FIREBASE CONFIG
 ========================= */
 
-let schedule = {
-    Monday: [],
-    Tuesday: [],
-    Wednesday: [],
-    Thursday: [],
-    Friday: []
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCx_Rkir6aQiga4GBrP1o0zY2TGFZX_SMQ",
+
+    authDomain:
+        "pink-schedule.firebaseapp.com",
+
+    projectId:
+        "pink-schedule",
+
+    storageBucket:
+        "pink-schedule.firebasestorage.app",
+
+    messagingSenderId:
+        "180291511614",
+
+    appId:
+        "1:180291511614:web:3f764d6d0cad151decb86f",
+
+    measurementId:
+        "G-LK35WM0GH7"
 };
 
-let cameraStream = null;
-let detector = null;
-let scanTimer = null;
-let scanning = false;
+
+/* =========================
+   INITIALIZE
+========================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const googleProvider =
+    new GoogleAuthProvider();
 
 
 /* =========================
-   LOGIN
+   LOGIN GOOGLE
 ========================= */
 
-function login() {
+window.signInGoogle = async function(){
 
-    const name =
-        document.getElementById("nameInput")
-        .value
-        .trim();
+    try{
 
-    if (!name) {
+        await signInWithPopup(
+            auth,
+            googleProvider
+        );
 
-        showToast("Please enter your name ♡");
+        showToast(
+            "Welcome to Pink Schedule ♡"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            friendlyError(error)
+        );
+    }
+};
+
+
+/* =========================
+   EMAIL LOGIN
+========================= */
+
+window.signInEmail = async function(){
+
+    const email =
+        document.getElementById("email")
+        .value.trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    if(!email || !password){
+
+        showToast(
+            "Enter your email and password."
+        );
+
         return;
     }
 
-    localStorage.setItem(
-        "studentName",
-        name
-    );
+    try{
 
-    showApp();
-}
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
+        showToast(
+            "Signed in successfully ♡"
+        );
 
-function showApp() {
+    }catch(error){
 
-    const name =
-        localStorage.getItem("studentName");
+        console.error(error);
 
-    if (!name) return;
-
-    document.getElementById("loginPage")
-        .style.display = "none";
-
-    document.getElementById("app")
-        .style.display = "block";
-
-    document.getElementById("welcomeName")
-        .textContent = name;
-
-    document.getElementById("profileName")
-        .textContent = name;
-
-    loadSchedule();
-}
-
-
-function logout() {
-
-    stopScanner();
-
-    localStorage.removeItem("studentName");
-
-    location.reload();
-}
-
-
-/* ENTER KEY LOGIN */
-
-document
-    .getElementById("nameInput")
-    .addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-            login();
-        }
-
-    });
+        showToast(
+            friendlyError(error)
+        );
+    }
+};
 
 
 /* =========================
-   NAVIGATION
+   CREATE ACCOUNT
 ========================= */
 
-function openPage(pageId, button) {
+window.createAccount = async function(){
 
-    stopScanner();
+    const email =
+        document.getElementById("email")
+        .value.trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    if(!email || !password){
+
+        showToast(
+            "Enter an email and password first."
+        );
+
+        return;
+    }
+
+    if(password.length < 6){
+
+        showToast(
+            "Password must be at least 6 characters."
+        );
+
+        return;
+    }
+
+    try{
+
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        showToast(
+            "Account created ♡"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            friendlyError(error)
+        );
+    }
+};
+
+
+/* =========================
+   RESET PASSWORD
+========================= */
+
+window.forgotPassword = async function(){
+
+    const email =
+        document.getElementById("email")
+        .value.trim();
+
+    if(!email){
+
+        showToast(
+            "Enter your email first."
+        );
+
+        return;
+    }
+
+    try{
+
+        await sendPasswordResetEmail(
+            auth,
+            email
+        );
+
+        showToast(
+            "Password reset email sent ♡"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            friendlyError(error)
+        );
+    }
+};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(user){
+
+            showAppForUser(user);
+
+        }else{
+
+            document.getElementById("app")
+                .style.display="none";
+
+            document.getElementById("loginPage")
+                .style.display="flex";
+        }
+    }
+);
+
+
+/* =========================
+   SHOW APP
+========================= */
+
+function showAppForUser(user){
+
+    document.getElementById("loginPage")
+        .style.display="none";
+
+    document.getElementById("app")
+        .style.display="block";
+
+    const name =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        "Student";
+
+    document.getElementById("welcomeName")
+        .textContent=name;
+
+    document.getElementById("profileName")
+        .textContent=name;
+
+    document.getElementById("profileEmail")
+        .textContent=user.email || "";
+
+    loadSchedule();
+
+    checkPin();
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout = async function(){
+
+    try{
+
+        await signOut(auth);
+
+        showToast(
+            "Logged out."
+        );
+
+    }catch(error){
+
+        showToast(
+            friendlyError(error)
+        );
+    }
+};
+
+
+/* =========================
+   FRIENDLY ERRORS
+========================= */
+
+function friendlyError(error){
+
+    const code =
+        error?.code || "";
+
+    switch(code){
+
+        case "auth/invalid-credential":
+            return "Email or password is incorrect.";
+
+        case "auth/email-already-in-use":
+            return "That email already has an account.";
+
+        case "auth/invalid-email":
+            return "Please enter a valid email.";
+
+        case "auth/weak-password":
+            return "Password must be at least 6 characters.";
+
+        case "auth/popup-closed-by-user":
+            return "Google sign-in was cancelled.";
+
+        case "auth/too-many-requests":
+            return "Too many attempts. Try again later.";
+
+        default:
+            return "Something went wrong. Please try again.";
+    }
+}
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+window.openPage =
+function(pageId,button){
 
     document.querySelectorAll(".page")
-        .forEach(page => {
-            page.classList.remove("active");
-        });
+        .forEach(p =>
+            p.classList.remove("active")
+        );
 
     document.getElementById(pageId)
         .classList.add("active");
 
     document.querySelectorAll(".nav button")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+    if(button){
+        button.classList.add("active");
+    }
+};
+
+
+window.goSchedule =
+function(){
+
+    const button =
+        document.querySelectorAll(".nav button")[1];
+
+    openPage(
+        "schedulePage",
+        button
+    );
+};
+
+
+window.goAddClass =
+function(){
+
+    openEditor("Monday");
+
+    const button =
+        document.querySelectorAll(".nav button")[2];
+
+    document.querySelectorAll(".nav button")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
 
     button.classList.add("active");
-}
-
-
-function goToScan() {
-
-    const buttons =
-        document.querySelectorAll(".nav button");
-
-    openPage("scanPage", buttons[2]);
-
-    startScanner();
-}
+};
 
 
 /* =========================
-   SCHEDULE STORAGE
+   SCHEDULE
 ========================= */
 
-function loadSchedule() {
+let schedule = {
+
+    Monday:[],
+    Tuesday:[],
+    Wednesday:[],
+    Thursday:[],
+    Friday:[]
+
+};
+
+let editingDay = null;
+let editingIndex = null;
+
+
+function loadSchedule(){
 
     const saved =
-        localStorage.getItem("pinkSchedule");
+        localStorage.getItem(
+            "pinkSchedule"
+        );
 
-    if (saved) {
+    if(saved){
 
-        try {
+        try{
 
-            const parsed =
+            schedule =
                 JSON.parse(saved);
 
-            if (
-                parsed &&
-                typeof parsed === "object"
-            ) {
-                schedule = parsed;
-            }
-
-        } catch (error) {
+        }catch{
 
             schedule = {
-                Monday: [],
-                Tuesday: [],
-                Wednesday: [],
-                Thursday: [],
-                Friday: []
+                Monday:[],
+                Tuesday:[],
+                Wednesday:[],
+                Thursday:[],
+                Friday:[]
             };
         }
     }
@@ -996,7 +1465,7 @@ function loadSchedule() {
 }
 
 
-function saveSchedule() {
+function saveSchedule(){
 
     localStorage.setItem(
         "pinkSchedule",
@@ -1005,479 +1474,398 @@ function saveSchedule() {
 }
 
 
-/* =========================
-   DISPLAY SCHEDULE
-========================= */
-
-function renderSchedule() {
+function renderSchedule(){
 
     document.querySelectorAll(".classes")
-        .forEach(box => {
-            box.innerHTML = "";
-        });
+        .forEach(box =>
+            box.innerHTML=""
+        );
 
-    let total = 0;
-
-    for (const day in schedule) {
+    for(const day in schedule){
 
         const box =
             document.querySelector(
                 `.day[data-day="${day}"] .classes`
             );
 
-        if (!box) continue;
+        if(!box) continue;
 
-        if (
-            !Array.isArray(schedule[day]) ||
-            schedule[day].length === 0
-        ) {
+        if(schedule[day].length===0){
 
             box.innerHTML =
-                `<div class="no-class">No classes</div>`;
+                `<div class="empty-day">
+                    No classes
+                </div>`;
 
             continue;
         }
 
-        schedule[day].forEach(item => {
+        schedule[day].forEach(
+            (item,index)=>{
 
-            total++;
+                const div =
+                    document.createElement("div");
 
-            const div =
-                document.createElement("div");
+                div.className =
+                    "class-item";
 
-            div.className = "class-item";
+                div.innerHTML=`
 
-            div.innerHTML = `
-                <div class="time">
-                    ${escapeHTML(item.time)}
-                </div>
+                    <div class="time">
+                        ${escapeHTML(item.time)}
+                    </div>
 
-                <strong>
-                    ${escapeHTML(item.subject)}
-                </strong>
+                    <strong>
+                        ${escapeHTML(item.subject)}
+                    </strong>
 
-                <small>
-                    ${escapeHTML(item.teacher || "")}
+                    <small>
+                        ${escapeHTML(item.teacher)}
+                    </small>
+
                     ${
                         item.room
-                        ? " • " + escapeHTML(item.room)
+                        ? `<small>Room: ${escapeHTML(item.room)}</small>`
                         : ""
                     }
-                </small>
-            `;
 
-            box.appendChild(div);
+                    <div class="class-actions">
 
-        });
-    }
+                        <button
+                            class="edit-btn"
+                            onclick="editClass('${day}',${index})">
+                            Edit
+                        </button>
 
-    if (total === 0) {
+                        <button
+                            class="delete-btn"
+                            onclick="deleteClass('${day}',${index})">
+                            Delete
+                        </button>
 
-        document.getElementById("homeTitle")
-            .textContent =
-            "Your schedule is empty";
+                    </div>
+                `;
 
-        document.getElementById("homeText")
-            .textContent =
-            "Scan your school QR code to add your classes.";
-
-    } else {
-
-        document.getElementById("homeTitle")
-            .textContent =
-            total + " classes this week";
-
-        document.getElementById("homeText")
-            .textContent =
-            "Your schedule is saved on this device.";
-    }
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchClasses() {
-
-    const query =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    document.querySelectorAll(".class-item")
-        .forEach(item => {
-
-            const text =
-                item.textContent.toLowerCase();
-
-            item.style.display =
-                text.includes(query)
-                ? "block"
-                : "none";
-        });
-}
-
-
-/* =========================
-   QR SCANNER
-========================= */
-
-async function startScanner() {
-
-    if (scanning) return;
-
-    const status =
-        document.getElementById("scanStatus");
-
-    const camera =
-        document.getElementById("camera");
-
-    const video =
-        document.getElementById("video");
-
-    if (!navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia) {
-
-        status.textContent =
-            "Camera is not available here.";
-
-        showManual();
-
-        return;
-    }
-
-    if (!("BarcodeDetector" in window)) {
-
-        status.textContent =
-            "Automatic QR scanning is not supported by this browser.";
-
-        showManual();
-
-        return;
-    }
-
-    try {
-
-        detector =
-            new BarcodeDetector({
-                formats: ["qr_code"]
-            });
-
-        cameraStream =
-            await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: {
-                        ideal: "environment"
-                    }
-                },
-                audio: false
-            });
-
-        video.srcObject = cameraStream;
-
-        camera.style.display = "block";
-
-        document.getElementById("startScanButton")
-            .style.display = "none";
-
-        document.getElementById("stopScanButton")
-            .style.display = "block";
-
-        await video.play();
-
-        scanning = true;
-
-        status.textContent =
-            "Scanning automatically ♡";
-
-        scanLoop();
-
-    } catch (error) {
-
-        console.error(error);
-
-        status.textContent =
-            "Please allow camera access.";
-
-        showToast(
-            "Camera permission is required ♡"
-        );
-    }
-}
-
-
-async function scanLoop() {
-
-    if (!scanning) return;
-
-    const video =
-        document.getElementById("video");
-
-    try {
-
-        if (
-            video.readyState >= 2 &&
-            detector
-        ) {
-
-            const codes =
-                await detector.detect(video);
-
-            if (codes.length > 0) {
-
-                importSchedule(
-                    codes[0].rawValue
-                );
-
-                return;
+                box.appendChild(div);
             }
-        }
-
-    } catch (error) {
-
-        console.log(error);
-    }
-
-    scanTimer =
-        setTimeout(scanLoop, 300);
-}
-
-
-function stopScanner() {
-
-    scanning = false;
-
-    if (scanTimer) {
-
-        clearTimeout(scanTimer);
-        scanTimer = null;
-    }
-
-    if (cameraStream) {
-
-        cameraStream
-            .getTracks()
-            .forEach(track => {
-                track.stop();
-            });
-
-        cameraStream = null;
-    }
-
-    const video =
-        document.getElementById("video");
-
-    if (video) {
-        video.srcObject = null;
-    }
-
-    const camera =
-        document.getElementById("camera");
-
-    if (camera) {
-        camera.style.display = "none";
-    }
-
-    const startButton =
-        document.getElementById("startScanButton");
-
-    if (startButton) {
-        startButton.style.display = "block";
-    }
-
-    const stopButton =
-        document.getElementById("stopScanButton");
-
-    if (stopButton) {
-        stopButton.style.display = "none";
+        );
     }
 }
 
 
 /* =========================
-   IMPORT QR SCHEDULE
+   EDITOR
 ========================= */
 
-/*
-QR CODE FORMAT:
+window.openEditor =
+function(day,index=null){
 
-Monday|7:30 AM - 8:30 AM|Mathematics|Mr. Santos|Room 201
-Tuesday|9:00 AM - 10:00 AM|Science|Ms. Garcia|Room 202
-Wednesday|10:00 AM - 11:00 AM|Programming|Mr. Cruz|Computer Lab
-*/
+    editingDay=day;
+    editingIndex=index;
 
-function importSchedule(text) {
+    document.getElementById("dayInput")
+        .value=day;
 
-    const lines =
-        String(text)
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(Boolean);
+    if(index !== null){
 
-    let added = 0;
+        const item =
+            schedule[day][index];
 
-    lines.forEach(line => {
+        document.getElementById("editorTitle")
+            .textContent="Edit Class";
 
-        const parts =
-            line
-            .split("|")
-            .map(part => part.trim());
+        document.getElementById("timeInput")
+            .value=item.time;
 
-        if (parts.length < 4) return;
+        document.getElementById("subjectInput")
+            .value=item.subject;
 
-        const day = parts[0];
+        document.getElementById("teacherInput")
+            .value=item.teacher;
 
-        if (!schedule[day]) return;
+        document.getElementById("roomInput")
+            .value=item.room;
 
-        schedule[day].push({
+    }else{
 
-            time: parts[1],
+        document.getElementById("editorTitle")
+            .textContent="Add Class";
 
-            subject: parts[2],
+        document.getElementById("timeInput")
+            .value="";
 
-            teacher: parts[3],
+        document.getElementById("subjectInput")
+            .value="";
 
-            room: parts[4] || ""
+        document.getElementById("teacherInput")
+            .value="";
 
-        });
+        document.getElementById("roomInput")
+            .value="";
+    }
 
-        added++;
-    });
+    openPage(
+        "editorPage",
+        null
+    );
+};
 
-    if (added === 0) {
+
+window.editClass =
+function(day,index){
+
+    openEditor(
+        day,
+        index
+    );
+};
+
+
+window.saveClass =
+function(){
+
+    const newDay =
+        document.getElementById("dayInput")
+        .value;
+
+    const time =
+        document.getElementById("timeInput")
+        .value.trim();
+
+    const subject =
+        document.getElementById("subjectInput")
+        .value.trim();
+
+    const teacher =
+        document.getElementById("teacherInput")
+        .value.trim();
+
+    const room =
+        document.getElementById("roomInput")
+        .value.trim();
+
+    if(!time || !subject){
 
         showToast(
-            "QR code format not recognized."
+            "Enter the time and subject."
         );
 
-        document.getElementById("scanStatus")
-            .textContent =
-            "That QR code does not contain a schedule.";
-
         return;
+    }
+
+    const item={
+
+        time,
+
+        subject,
+
+        teacher:
+            teacher || "Teacher not added",
+
+        room
+    };
+
+
+    if(
+        editingDay !== null &&
+        editingIndex !== null
+    ){
+
+        schedule[editingDay]
+            .splice(
+                editingIndex,
+                1
+            );
+
+        schedule[newDay]
+            .push(item);
+
+        showToast(
+            "Class updated ♡"
+        );
+
+    }else{
+
+        schedule[newDay]
+            .push(item);
+
+        showToast(
+            "Class added ♡"
+        );
     }
 
     saveSchedule();
 
     renderSchedule();
 
-    stopScanner();
+    editingDay=null;
+    editingIndex=null;
 
-    document.getElementById("scanStatus")
-        .textContent =
-        "Schedule imported successfully ♡";
+    goSchedule();
+};
+
+
+window.deleteClass =
+function(day,index){
+
+    if(
+        !confirm(
+            "Delete this class?"
+        )
+    ){
+        return;
+    }
+
+    schedule[day]
+        .splice(index,1);
+
+    saveSchedule();
+
+    renderSchedule();
 
     showToast(
-        added +
-        (added === 1
-            ? " class added ♡"
-            : " classes added ♡")
+        "Class deleted."
     );
-
-    const buttons =
-        document.querySelectorAll(".nav button");
-
-    openPage("schedulePage", buttons[1]);
-}
+};
 
 
 /* =========================
-   MANUAL INPUT
+   SEARCH
 ========================= */
 
-function toggleManual() {
+window.searchClasses =
+function(){
 
-    const box =
-        document.getElementById("manualBox");
+    const query =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
 
-    box.style.display =
-        box.style.display === "block"
-        ? "none"
-        : "block";
+    document.querySelectorAll(".class-item")
+        .forEach(item => {
+
+            item.style.display =
+                item.textContent
+                    .toLowerCase()
+                    .includes(query)
+                ? "block"
+                : "none";
+        });
+};
+
+
+/* =========================
+   PIN
+========================= */
+
+function checkPin(){
+
+    const pin =
+        localStorage.getItem("pinkSchedulePin");
+
+    if(!pin){
+
+        setTimeout(
+            setupPin,
+            500
+        );
+    }
 }
 
 
-function showManual() {
+window.setupPin =
+function(){
 
-    const box =
-        document.getElementById("manualBox");
+    document.getElementById("pinModal")
+        .style.display="flex";
 
-    box.style.display = "block";
-}
+    document.getElementById("pinInput")
+        .value="";
+
+    document.getElementById("pinConfirm")
+        .value="";
+};
+
+
+window.closePin =
+function(){
+
+    document.getElementById("pinModal")
+        .style.display="none";
+};
+
+
+window.savePin =
+function(){
+
+    const pin =
+        document.getElementById("pinInput")
+        .value;
+
+    const confirmPin =
+        document.getElementById("pinConfirm")
+        .value;
+
+    if(!/^\d{4,6}$/.test(pin)){
+
+        showToast(
+            "PIN must contain 4–6 digits."
+        );
+
+        return;
+    }
+
+    if(pin !== confirmPin){
+
+        showToast(
+            "PINs do not match."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "pinkSchedulePin",
+        pin
+    );
+
+    closePin();
+
+    showToast(
+        "PIN saved on this device ♡"
+    );
+};
 
 
 /* =========================
    THEME
 ========================= */
 
-function toggleTheme() {
+window.toggleTheme =
+function(){
 
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle(
+        "dark"
+    );
 
     localStorage.setItem(
         "pinkDark",
-        document.body.classList.contains("dark")
+        document.body.classList.contains(
+            "dark"
+        )
     );
-}
+};
 
 
-if (
-    localStorage.getItem("pinkDark")
-    === "true"
-) {
+if(
+    localStorage.getItem(
+        "pinkDark"
+    )==="true"
+){
 
-    document.body.classList.add("dark");
-}
-
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-async function testNotification() {
-
-    const alertMessage =
-        document.getElementById("alertMessage");
-
-    alertMessage.textContent =
-        "Notifications are ready to use on this device ♡";
-
-    showToast(
-        "Notification button works ♡"
+    document.body.classList.add(
+        "dark"
     );
-
-    if (!("Notification" in window)) {
-        return;
-    }
-
-    try {
-
-        let permission =
-            Notification.permission;
-
-        if (permission === "default") {
-
-            permission =
-                await Notification.requestPermission();
-        }
-
-        if (permission === "granted") {
-
-            new Notification(
-                "Pink Schedule ♡",
-                {
-                    body:
-                    "Your notification system is working."
-                }
-            );
-        }
-
-    } catch (error) {
-
-        console.log(error);
-    }
 }
 
 
@@ -1485,20 +1873,21 @@ async function testNotification() {
    TOAST
 ========================= */
 
-function showToast(message) {
+function showToast(message){
 
     const toast =
         document.getElementById("toast");
 
-    toast.textContent = message;
+    toast.textContent=message;
 
-    toast.style.display = "block";
+    toast.style.display="block";
 
-    setTimeout(() => {
-
-        toast.style.display = "none";
-
-    }, 3000);
+    setTimeout(
+        ()=>{
+            toast.style.display="none";
+        },
+        3000
+    );
 }
 
 
@@ -1506,29 +1895,18 @@ function showToast(message) {
    SECURITY
 ========================= */
 
-function escapeHTML(value) {
+function escapeHTML(text){
 
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-/* =========================
-   START APP
-========================= */
-
-if (
-    localStorage.getItem("studentName")
-) {
-
-    showApp();
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 </script>
 
 </body>
 </html>
+```
