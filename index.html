@@ -4,598 +4,625 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f47aaa">
-
+<meta name="theme-color" content="#f58ab1">
 <title>Pink Schedule</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Inter, Arial, sans-serif;
 }
 
-:root{
-    --pink:#f47aaa;
-    --pink-dark:#df5f95;
-    --light:#fff2f7;
-    --white:#ffffff;
-    --text:#333;
-    --gray:#999;
-    --border:#f2d4e1;
-    --danger:#e56b7f;
+:root {
+    --pink: #f58ab1;
+    --pink-dark: #df6994;
+    --pink-soft: #fff1f6;
+    --bg: #fff9fb;
+    --card: #ffffff;
+    --text: #342c30;
+    --muted: #9b8f94;
+    --border: #f5dce6;
+    --danger: #df6877;
 }
 
-body{
-    background:var(--light);
-    color:var(--text);
-    min-height:100vh;
+body.dark {
+    --bg: #171316;
+    --card: #241d21;
+    --text: #fff;
+    --muted: #aaa;
+    --border: #46333b;
+    --pink-soft: #302228;
 }
 
-body.dark{
-    --light:#181418;
-    --white:#261f25;
-    --text:#fff;
-    --gray:#aaa;
-    --border:#4d3541;
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* ================= LOGIN ================= */
 
-#loginPage{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+#loginPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(145deg, #fff4f8, #ffd8e7);
 }
 
-.login-box{
-    width:100%;
-    max-width:390px;
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:25px;
-    padding:30px 24px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(244,122,170,.12);
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 18px 50px rgba(245, 138, 177, .18);
 }
 
-.logo{
-    width:70px;
-    height:70px;
-    margin:auto;
-    border-radius:21px;
-    background:var(--pink);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:31px;
+.logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pink);
+    color: white;
+    font-size: 34px;
 }
 
-.login-box h1{
-    color:var(--pink);
-    margin-top:15px;
+.login-card h1 {
+    color: var(--pink);
+    margin-top: 15px;
 }
 
-.login-box p{
-    color:var(--gray);
-    font-size:14px;
-    margin:8px 0 20px;
+.login-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 8px 0 20px;
 }
 
 input,
-select{
-    width:100%;
-    padding:13px;
-    margin-bottom:10px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    background:var(--white);
-    color:var(--text);
-    outline:none;
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 13px 14px;
+    background: var(--card);
+    color: var(--text);
+    outline: none;
 }
 
 input:focus,
-select:focus{
-    border-color:var(--pink);
+select:focus,
+textarea:focus {
+    border-color: var(--pink);
 }
 
-button{
-    border:none;
-    cursor:pointer;
+.main-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 13px;
+    background: var(--pink);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.primary{
-    width:100%;
-    padding:13px;
-    border-radius:11px;
-    background:var(--pink);
-    color:#fff;
-    font-weight:bold;
+.google-btn {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--card);
+    color: var(--text);
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.google{
-    width:100%;
-    padding:13px;
-    border-radius:11px;
-    background:var(--white);
-    color:var(--text);
-    border:1px solid var(--border);
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-.divider{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:var(--gray);
-    font-size:12px;
-    margin:12px 0;
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 14px 0;
 }
 
 .divider::before,
-.divider::after{
-    content:"";
-    height:1px;
-    flex:1;
-    background:var(--border);
+.divider::after {
+    content: "";
+    height: 1px;
+    background: var(--border);
+    flex: 1;
 }
 
-.login-links{
-    display:flex;
-    justify-content:space-between;
-    margin-top:12px;
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    gap: 8px;
 }
 
-.text-btn{
-    background:none;
-    color:var(--pink);
-    font-size:12px;
-    font-weight:bold;
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--pink-dark);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-/* =========================
-   APP
-========================= */
+/* ================= APP ================= */
 
-#app{
-    display:none;
-    min-height:100vh;
-    padding-bottom:80px;
+#app {
+    display: none;
+    min-height: 100vh;
+    padding-bottom: 85px;
 }
 
-header{
-    height:65px;
-    padding:0 20px;
-    background:var(--white);
-    border-bottom:1px solid var(--border);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:10;
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 68px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
-header h2{
-    color:var(--pink);
-    font-size:19px;
+.brand {
+    color: var(--pink);
+    font-weight: 800;
+    font-size: 20px;
 }
 
-.theme{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    background:var(--light);
-    color:var(--pink);
-    font-size:17px;
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    border: none;
+    background: var(--pink-soft);
+    color: var(--pink-dark);
+    cursor: pointer;
+    font-size: 17px;
 }
 
-/* =========================
-   PAGES
-========================= */
-
-.page{
-    display:none;
-    width:92%;
-    max-width:1000px;
-    margin:25px auto;
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 24px auto;
 }
 
-.page.active{
-    display:block;
+.page {
+    display: none;
 }
 
-/* =========================
-   HOME
-========================= */
-
-.welcome{
-    background:var(--pink);
-    color:white;
-    padding:25px;
-    border-radius:20px;
-    margin-bottom:18px;
+.page.active {
+    display: block;
 }
 
-.welcome h1{
-    margin:6px 0;
+/* ================= HOME ================= */
+
+.hero {
+    background: linear-gradient(135deg, var(--pink), #ffb4d0);
+    color: white;
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 18px;
 }
 
-.home-card{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:25px;
+.hero small {
+    opacity: .85;
 }
 
-.home-card h2{
-    color:var(--pink);
+.hero h1 {
+    margin: 7px 0;
 }
 
-.home-card p{
-    color:var(--gray);
-    font-size:14px;
-    margin-top:7px;
+.hero p {
+    opacity: .92;
+    font-size: 14px;
 }
 
-.home-buttons{
-    margin-top:20px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.home-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 24px;
 }
 
-.secondary{
-    padding:13px;
-    border-radius:11px;
-    background:var(--light);
-    color:var(--pink);
-    font-weight:bold;
+.home-card h2 {
+    color: var(--pink-dark);
+    margin-bottom: 8px;
 }
 
-/* =========================
-   SCHEDULE
-========================= */
-
-.title{
-    color:var(--pink);
-    margin-bottom:15px;
+.home-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 18px;
 }
 
-.search{
-    margin-bottom:15px;
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
 }
 
-.week{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
+.stat {
+    background: var(--pink-soft);
+    border-radius: 16px;
+    padding: 18px;
+    text-align: center;
 }
 
-.day{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:13px;
-    min-height:260px;
+.stat strong {
+    display: block;
+    font-size: 24px;
+    color: var(--pink-dark);
 }
 
-.day-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:12px;
+.stat span {
+    font-size: 12px;
+    color: var(--muted);
 }
 
-.day-title h3{
-    color:var(--pink);
-    font-size:13px;
+/* ================= SCHEDULE ================= */
+
+.schedule-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
 }
 
-.add-day{
-    width:28px;
-    height:28px;
-    border-radius:8px;
-    background:var(--light);
-    color:var(--pink);
-    font-size:18px;
+.schedule-head h2 {
+    color: var(--pink-dark);
 }
 
-.class-item{
-    background:var(--light);
-    border-left:3px solid var(--pink);
-    border-radius:10px;
-    padding:10px;
-    margin-bottom:8px;
+.search {
+    max-width: 320px;
 }
 
-.class-item .time{
-    color:var(--pink);
-    font-size:10px;
-    font-weight:bold;
+.week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 9px;
 }
 
-.class-item strong{
-    display:block;
-    font-size:13px;
-    margin:4px 0;
+.day {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 12px;
+    min-height: 280px;
 }
 
-.class-item small{
-    display:block;
-    color:var(--gray);
-    font-size:10px;
+.day-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
 }
 
-.class-actions{
-    display:flex;
-    gap:5px;
-    margin-top:8px;
+.day-top h3 {
+    color: var(--pink-dark);
+    font-size: 12px;
+}
+
+.add-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: none;
+    background: var(--pink-soft);
+    color: var(--pink-dark);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.class-item {
+    background: var(--pink-soft);
+    border-left: 3px solid var(--pink);
+    border-radius: 11px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.class-item .time {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pink-dark);
+}
+
+.class-item strong {
+    display: block;
+    margin: 4px 0;
+    font-size: 12px;
+}
+
+.class-item small {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.class-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
 }
 
 .edit-btn,
-.delete-btn{
-    padding:6px 9px;
-    border-radius:8px;
-    font-size:10px;
-    font-weight:bold;
+.delete-btn {
+    padding: 6px 8px;
+    border: none;
+    border-radius: 7px;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.edit-btn{
-    background:white;
-    color:var(--pink);
+.edit-btn {
+    background: white;
+    color: var(--pink-dark);
 }
 
-.delete-btn{
-    background:white;
-    color:var(--danger);
+.delete-btn {
+    background: white;
+    color: var(--danger);
 }
 
-.empty-day{
-    text-align:center;
-    color:#bbb;
-    font-size:12px;
-    padding-top:30px;
+.empty {
+    text-align: center;
+    color: #b7aaaf;
+    font-size: 11px;
+    padding-top: 32px;
 }
 
-/* =========================
-   EDITOR
-========================= */
+/* ================= EDIT PAGE ================= */
 
-.editor{
-    max-width:500px;
-    margin:auto;
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:22px;
+.form-card {
+    max-width: 500px;
+    margin: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 24px;
 }
 
-.editor h2{
-    color:var(--pink);
-    margin-bottom:7px;
+.form-card h2 {
+    color: var(--pink-dark);
+    margin-bottom: 7px;
 }
 
-.editor p{
-    color:var(--gray);
-    font-size:13px;
-    margin-bottom:15px;
+.form-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 16px;
 }
 
-.form-buttons{
-    display:flex;
-    gap:8px;
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
 }
 
-.form-buttons button{
-    flex:1;
-    padding:13px;
-    border-radius:11px;
-    font-weight:bold;
+.form-buttons button {
+    flex: 1;
+    padding: 13px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.cancel{
-    background:var(--light);
-    color:var(--pink);
+.cancel-btn {
+    border: none;
+    background: var(--pink-soft);
+    color: var(--pink-dark);
 }
 
-.save{
-    background:var(--pink);
-    color:white;
+.save-btn {
+    border: none;
+    background: var(--pink);
+    color: white;
 }
 
-/* =========================
-   PROFILE
-========================= */
+/* ================= PROFILE ================= */
 
-.profile{
-    max-width:420px;
-    margin:auto;
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:28px;
-    text-align:center;
+.profile-card {
+    max-width: 430px;
+    margin: auto;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 28px;
 }
 
-.avatar{
-    width:75px;
-    height:75px;
-    border-radius:50%;
-    background:var(--pink);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:auto;
-    font-size:30px;
+.avatar {
+    width: 82px;
+    height: 82px;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--pink);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
 }
 
-.profile h2{
-    color:var(--pink);
-    margin-top:12px;
+.profile-card h2 {
+    color: var(--pink-dark);
+    margin-top: 12px;
 }
 
-.profile p{
-    color:var(--gray);
-    margin:5px 0 20px;
+.profile-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
 }
 
-.logout,
-.reset-pin{
-    padding:11px 18px;
-    border-radius:10px;
-    font-weight:bold;
+.profile-actions {
+    margin-top: 20px;
+    display: grid;
+    gap: 9px;
 }
 
-.logout{
-    background:#eee;
-    color:#555;
+.profile-actions button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.reset-pin{
-    background:var(--light);
-    color:var(--pink);
-    margin-right:5px;
+.pin-btn {
+    background: var(--pink-soft);
+    color: var(--pink-dark);
 }
 
-/* =========================
-   NAV
-========================= */
-
-nav{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    height:70px;
-    background:var(--white);
-    border-top:1px solid var(--border);
-    z-index:20;
+.logout-btn {
+    background: #eee;
+    color: #555;
 }
 
-.nav{
-    height:100%;
-    max-width:650px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
+/* ================= NAV ================= */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    z-index: 20;
 }
 
-.nav button{
-    background:transparent;
-    color:var(--gray);
-    font-size:10px;
+.nav {
+    max-width: 600px;
+    height: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
-.nav button span{
-    display:block;
-    font-size:20px;
-    margin-bottom:3px;
+.nav button {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 10px;
 }
 
-.nav button.active{
-    color:var(--pink);
+.nav button span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
 }
 
-/* =========================
-   PIN MODAL
-========================= */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    z-index:100;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+.nav button.active {
+    color: var(--pink-dark);
 }
 
-.modal-box{
-    width:100%;
-    max-width:360px;
-    background:var(--white);
-    border-radius:20px;
-    padding:25px;
-    text-align:center;
+/* ================= PIN MODAL ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.55);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-.modal-box h2{
-    color:var(--pink);
-    margin-bottom:7px;
+.modal-card {
+    width: 100%;
+    max-width: 360px;
+    background: var(--card);
+    border-radius: 22px;
+    padding: 24px;
 }
 
-.modal-box p{
-    color:var(--gray);
-    font-size:13px;
-    margin-bottom:15px;
+.modal-card h2 {
+    color: var(--pink-dark);
+    margin-bottom: 6px;
 }
 
-.pin-input{
-    text-align:center;
-    letter-spacing:8px;
-    font-size:22px;
+.modal-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 15px;
 }
 
-.close-btn{
-    width:100%;
-    margin-top:10px;
-    padding:12px;
-    border-radius:10px;
-    background:var(--light);
-    color:var(--pink);
+.pin-input {
+    text-align: center;
+    letter-spacing: 7px;
+    font-size: 20px;
 }
 
-/* =========================
-   TOAST
-========================= */
+/* ================= TOAST ================= */
 
-.toast{
-    display:none;
-    position:fixed;
-    left:50%;
-    bottom:90px;
-    transform:translateX(-50%);
-    background:var(--white);
-    color:var(--text);
-    border-left:4px solid var(--pink);
-    padding:13px 18px;
-    border-radius:12px;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
-    z-index:200;
+.toast {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: 88px;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: var(--card);
+    border-left: 4px solid var(--pink);
+    padding: 12px 17px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+    white-space: nowrap;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* ================= MOBILE ================= */
 
-@media(max-width:850px){
-    .week{
-        grid-template-columns:1fr;
-    }
-
-    .day{
-        min-height:120px;
+@media(max-width: 950px) {
+    .week {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media(max-width:450px){
-    .home-buttons{
-        grid-template-columns:1fr;
+@media(max-width: 700px) {
+    .week {
+        grid-template-columns: 1fr;
     }
 
-    .login-links{
-        flex-direction:column;
-        gap:10px;
+    .day {
+        min-height: 130px;
+    }
+
+    .schedule-head {
+        display: block;
+    }
+
+    .search {
+        max-width: none;
+        margin-top: 12px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
     }
 }
 </style>
@@ -603,56 +630,54 @@ nav{
 
 <body>
 
-<!-- =========================
-     LOGIN PAGE
-========================= -->
+<!-- ================= LOGIN ================= -->
 
 <section id="loginPage">
 
-<div class="login-box">
+<div class="login-card">
 
     <div class="logo">♡</div>
 
     <h1>Pink Schedule</h1>
 
-    <p>Your classes. Your schedule. Your way.</p>
+    <p>Keep your whole week organized.</p>
 
     <button
-        class="google"
-        onclick="signInGoogle()">
-        G Continue with Google
+        class="google-btn"
+        onclick="googleLogin()">
+        G &nbsp; Continue with Google
     </button>
 
     <div class="divider">or</div>
 
     <input
-        id="email"
+        id="emailInput"
         type="email"
         placeholder="Email">
 
     <input
-        id="password"
+        id="passwordInput"
         type="password"
         placeholder="Password">
 
     <button
-        class="primary"
-        onclick="signInEmail()">
+        class="main-btn"
+        onclick="emailLogin()">
         Sign In
     </button>
 
-    <div class="login-links">
+    <div class="login-actions">
 
         <button
-            class="text-btn"
+            class="link-btn"
             onclick="createAccount()">
-            Create Account
+            Create account
         </button>
 
         <button
-            class="text-btn"
-            onclick="forgotPassword()">
-            Forgot Password?
+            class="link-btn"
+            onclick="resetPassword()">
+            Forgot password?
         </button>
 
     </div>
@@ -662,18 +687,18 @@ nav{
 </section>
 
 
-<!-- =========================
-     APP
-========================= -->
+<!-- ================= APP ================= -->
 
 <section id="app">
 
-<header>
+<header class="topbar">
 
-    <h2>Pink Schedule ♡</h2>
+    <div class="brand">
+        Pink Schedule ♡
+    </div>
 
     <button
-        class="theme"
+        class="theme-btn"
         onclick="toggleTheme()">
         ☾
     </button>
@@ -681,44 +706,51 @@ nav{
 </header>
 
 
+<div class="container">
+
 <!-- HOME -->
 
 <section id="homePage" class="page active">
 
-    <div class="welcome">
+    <div class="hero">
 
-        <small>WELCOME</small>
+        <small>WELCOME BACK</small>
 
         <h1>
-            Hi, <span id="welcomeName"></span> ♡
+            Hi, <span id="userName">Student</span> ♡
         </h1>
 
-        <p>Edit your schedule anytime.</p>
+        <p>
+            Everything for your week, in one place.
+        </p>
 
     </div>
 
     <div class="home-card">
 
-        <h2>Your Weekly Schedule</h2>
+        <h2>Weekly overview</h2>
 
         <p>
-            Add your classes below. Everything is saved
-            on this device for offline use.
+            Add your classes below and edit them anytime.
+            Your schedule is saved on this device.
         </p>
 
-        <div class="home-buttons">
+        <div class="stats">
 
-            <button
-                class="primary"
-                onclick="goSchedule()">
-                View Schedule
-            </button>
+            <div class="stat">
+                <strong id="totalClasses">0</strong>
+                <span>Total classes</span>
+            </div>
 
-            <button
-                class="secondary"
-                onclick="goAddClass()">
-                + Add Class
-            </button>
+            <div class="stat">
+                <strong>7</strong>
+                <span>Days</span>
+            </div>
+
+            <div class="stat">
+                <strong id="todayClasses">0</strong>
+                <span>Today's classes</span>
+            </div>
 
         </div>
 
@@ -731,100 +763,74 @@ nav{
 
 <section id="schedulePage" class="page">
 
-    <h2 class="title">
-        My Weekly Schedule
-    </h2>
+    <div class="schedule-head">
 
-    <input
-        id="search"
-        class="search"
-        placeholder="Search subject or teacher..."
-        onkeyup="searchClasses()">
+        <h2>My Schedule</h2>
+
+        <input
+            id="searchInput"
+            class="search"
+            placeholder="Search classes..."
+            oninput="searchClasses()">
+
+    </div>
 
     <div class="week">
 
         <div class="day" data-day="Monday">
-
-            <div class="day-title">
-                <h3>MONDAY</h3>
-
-                <button
-                    class="add-day"
-                    onclick="openEditor('Monday')">
-                    +
-                </button>
+            <div class="day-top">
+                <h3>MON</h3>
+                <button class="add-btn" onclick="openEditor('Monday')">+</button>
             </div>
-
             <div class="classes"></div>
-
         </div>
-
 
         <div class="day" data-day="Tuesday">
-
-            <div class="day-title">
-                <h3>TUESDAY</h3>
-
-                <button
-                    class="add-day"
-                    onclick="openEditor('Tuesday')">
-                    +
-                </button>
+            <div class="day-top">
+                <h3>TUE</h3>
+                <button class="add-btn" onclick="openEditor('Tuesday')">+</button>
             </div>
-
             <div class="classes"></div>
-
         </div>
-
 
         <div class="day" data-day="Wednesday">
-
-            <div class="day-title">
-                <h3>WEDNESDAY</h3>
-
-                <button
-                    class="add-day"
-                    onclick="openEditor('Wednesday')">
-                    +
-                </button>
+            <div class="day-top">
+                <h3>WED</h3>
+                <button class="add-btn" onclick="openEditor('Wednesday')">+</button>
             </div>
-
             <div class="classes"></div>
-
         </div>
-
 
         <div class="day" data-day="Thursday">
-
-            <div class="day-title">
-                <h3>THURSDAY</h3>
-
-                <button
-                    class="add-day"
-                    onclick="openEditor('Thursday')">
-                    +
-                </button>
+            <div class="day-top">
+                <h3>THU</h3>
+                <button class="add-btn" onclick="openEditor('Thursday')">+</button>
             </div>
-
             <div class="classes"></div>
-
         </div>
 
-
         <div class="day" data-day="Friday">
-
-            <div class="day-title">
-                <h3>FRIDAY</h3>
-
-                <button
-                    class="add-day"
-                    onclick="openEditor('Friday')">
-                    +
-                </button>
+            <div class="day-top">
+                <h3>FRI</h3>
+                <button class="add-btn" onclick="openEditor('Friday')">+</button>
             </div>
-
             <div class="classes"></div>
+        </div>
 
+        <div class="day" data-day="Saturday">
+            <div class="day-top">
+                <h3>SAT</h3>
+                <button class="add-btn" onclick="openEditor('Saturday')">+</button>
+            </div>
+            <div class="classes"></div>
+        </div>
+
+        <div class="day" data-day="Sunday">
+            <div class="day-top">
+                <h3>SUN</h3>
+                <button class="add-btn" onclick="openEditor('Sunday')">+</button>
+            </div>
+            <div class="classes"></div>
         </div>
 
     </div>
@@ -836,29 +842,25 @@ nav{
 
 <section id="editorPage" class="page">
 
-    <div class="editor">
+    <div class="form-card">
 
-        <h2 id="editorTitle">
-            Add Class
-        </h2>
+        <h2 id="editorTitle">Add Class</h2>
 
-        <p>
-            Fill in your class information.
-        </p>
+        <p>Enter the details for your class.</p>
 
         <select id="dayInput">
-
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
         </select>
 
         <input
             id="timeInput"
-            placeholder="Time">
+            placeholder="Time — e.g. 7:30 AM - 8:30 AM">
 
         <input
             id="subjectInput"
@@ -875,13 +877,13 @@ nav{
         <div class="form-buttons">
 
             <button
-                class="cancel"
+                class="cancel-btn"
                 onclick="goSchedule()">
                 Cancel
             </button>
 
             <button
-                class="save"
+                class="save-btn"
                 onclick="saveClass()">
                 Save Class
             </button>
@@ -897,11 +899,9 @@ nav{
 
 <section id="profilePage" class="page">
 
-    <div class="profile">
+    <div class="profile-card">
 
-        <div class="avatar">
-            ♡
-        </div>
+        <div class="avatar">♡</div>
 
         <h2 id="profileName">
             Student
@@ -911,26 +911,32 @@ nav{
             —
         </p>
 
-        <button
-            class="reset-pin"
-            onclick="setupPin()">
-            Set / Change PIN
-        </button>
+        <div class="profile-actions">
 
-        <button
-            class="logout"
-            onclick="logout()">
-            Log out
-        </button>
+            <button
+                class="pin-btn"
+                onclick="openPinModal()">
+                Set / Change PIN
+            </button>
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+                Log Out
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
+</div>
+
 
 <!-- NAVIGATION -->
 
-<nav>
+<nav class="bottom-nav">
 
 <div class="nav">
 
@@ -970,43 +976,44 @@ nav{
 
 <div id="pinModal" class="modal">
 
-    <div class="modal-box">
+<div class="modal-card">
 
-        <h2>Set Your PIN</h2>
+    <h2>Set Your PIN</h2>
 
-        <p>
-            Create a 4–6 digit PIN for this device.
-        </p>
+    <p>
+        Use 4–6 digits for your app PIN.
+    </p>
 
-        <input
-            id="pinInput"
-            class="pin-input"
-            type="password"
-            inputmode="numeric"
-            maxlength="6"
-            placeholder="••••••">
+    <input
+        id="pinInput"
+        class="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="••••••">
 
-        <input
-            id="pinConfirm"
-            class="pin-input"
-            type="password"
-            inputmode="numeric"
-            maxlength="6"
-            placeholder="Confirm PIN">
+    <input
+        id="pinConfirm"
+        class="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="Confirm">
 
-        <button
-            class="primary"
-            onclick="savePin()">
-            Save PIN
-        </button>
+    <button
+        class="main-btn"
+        onclick="savePin()">
+        Save PIN
+    </button>
 
-        <button
-            class="close-btn"
-            onclick="closePin()">
-            Cancel
-        </button>
+    <button
+        class="cancel-btn"
+        style="width:100%;margin-top:9px;padding:12px;border-radius:12px;"
+        onclick="closePinModal()">
+        Cancel
+    </button>
 
-    </div>
+</div>
 
 </div>
 
@@ -1018,9 +1025,8 @@ nav{
 
 <script type="module">
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
     getAuth,
@@ -1031,12 +1037,9 @@ import {
     sendPasswordResetEmail,
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-========================= */
 
 const firebaseConfig = {
 
@@ -1063,10 +1066,6 @@ const firebaseConfig = {
 };
 
 
-/* =========================
-   INITIALIZE
-========================= */
-
 const app =
     initializeApp(firebaseConfig);
 
@@ -1077,11 +1076,8 @@ const googleProvider =
     new GoogleAuthProvider();
 
 
-/* =========================
-   LOGIN GOOGLE
-========================= */
-
-window.signInGoogle = async function(){
+window.googleLogin =
+async function(){
 
     try{
 
@@ -1090,33 +1086,25 @@ window.signInGoogle = async function(){
             googleProvider
         );
 
-        showToast(
-            "Welcome to Pink Schedule ♡"
-        );
-
     }catch(error){
 
-        console.error(error);
-
         showToast(
-            friendlyError(error)
+            firebaseError(error)
         );
+
     }
 };
 
 
-/* =========================
-   EMAIL LOGIN
-========================= */
-
-window.signInEmail = async function(){
+window.emailLogin =
+async function(){
 
     const email =
-        document.getElementById("email")
+        document.getElementById("emailInput")
         .value.trim();
 
     const password =
-        document.getElementById("password")
+        document.getElementById("passwordInput")
         .value;
 
     if(!email || !password){
@@ -1136,33 +1124,24 @@ window.signInEmail = async function(){
             password
         );
 
-        showToast(
-            "Signed in successfully ♡"
-        );
-
     }catch(error){
 
-        console.error(error);
-
         showToast(
-            friendlyError(error)
+            firebaseError(error)
         );
     }
 };
 
 
-/* =========================
-   CREATE ACCOUNT
-========================= */
-
-window.createAccount = async function(){
+window.createAccount =
+async function(){
 
     const email =
-        document.getElementById("email")
+        document.getElementById("emailInput")
         .value.trim();
 
     const password =
-        document.getElementById("password")
+        document.getElementById("passwordInput")
         .value;
 
     if(!email || !password){
@@ -1197,23 +1176,18 @@ window.createAccount = async function(){
 
     }catch(error){
 
-        console.error(error);
-
         showToast(
-            friendlyError(error)
+            firebaseError(error)
         );
     }
 };
 
 
-/* =========================
-   RESET PASSWORD
-========================= */
-
-window.forgotPassword = async function(){
+window.resetPassword =
+async function(){
 
     const email =
-        document.getElementById("email")
+        document.getElementById("emailInput")
         .value.trim();
 
     if(!email){
@@ -1238,18 +1212,12 @@ window.forgotPassword = async function(){
 
     }catch(error){
 
-        console.error(error);
-
         showToast(
-            friendlyError(error)
+            firebaseError(error)
         );
     }
 };
 
-
-/* =========================
-   AUTH STATE
-========================= */
 
 onAuthStateChanged(
     auth,
@@ -1257,25 +1225,21 @@ onAuthStateChanged(
 
         if(user){
 
-            showAppForUser(user);
+            showLoggedIn(user);
 
         }else{
 
-            document.getElementById("app")
-                .style.display="none";
-
             document.getElementById("loginPage")
                 .style.display="flex";
+
+            document.getElementById("app")
+                .style.display="none";
         }
     }
 );
 
 
-/* =========================
-   SHOW APP
-========================= */
-
-function showAppForUser(user){
+function showLoggedIn(user){
 
     document.getElementById("loginPage")
         .style.display="none";
@@ -1288,7 +1252,7 @@ function showAppForUser(user){
         user.email?.split("@")[0] ||
         "Student";
 
-    document.getElementById("welcomeName")
+    document.getElementById("userName")
         .textContent=name;
 
     document.getElementById("profileName")
@@ -1298,47 +1262,22 @@ function showAppForUser(user){
         .textContent=user.email || "";
 
     loadSchedule();
-
-    checkPin();
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+window.logout =
+async function(){
 
-window.logout = async function(){
-
-    try{
-
-        await signOut(auth);
-
-        showToast(
-            "Logged out."
-        );
-
-    }catch(error){
-
-        showToast(
-            friendlyError(error)
-        );
-    }
+    await signOut(auth);
 };
 
 
-/* =========================
-   FRIENDLY ERRORS
-========================= */
+function firebaseError(error){
 
-function friendlyError(error){
-
-    const code =
-        error?.code || "";
-
-    switch(code){
+    switch(error.code){
 
         case "auth/invalid-credential":
-            return "Email or password is incorrect.";
+            return "Incorrect email or password.";
 
         case "auth/email-already-in-use":
             return "That email already has an account.";
@@ -1352,69 +1291,13 @@ function friendlyError(error){
         case "auth/popup-closed-by-user":
             return "Google sign-in was cancelled.";
 
-        case "auth/too-many-requests":
-            return "Too many attempts. Try again later.";
+        case "auth/popup-blocked":
+            return "Please allow the Google sign-in popup.";
 
         default:
             return "Something went wrong. Please try again.";
     }
 }
-
-
-/* =========================
-   PAGE NAVIGATION
-========================= */
-
-window.openPage =
-function(pageId,button){
-
-    document.querySelectorAll(".page")
-        .forEach(p =>
-            p.classList.remove("active")
-        );
-
-    document.getElementById(pageId)
-        .classList.add("active");
-
-    document.querySelectorAll(".nav button")
-        .forEach(b =>
-            b.classList.remove("active")
-        );
-
-    if(button){
-        button.classList.add("active");
-    }
-};
-
-
-window.goSchedule =
-function(){
-
-    const button =
-        document.querySelectorAll(".nav button")[1];
-
-    openPage(
-        "schedulePage",
-        button
-    );
-};
-
-
-window.goAddClass =
-function(){
-
-    openEditor("Monday");
-
-    const button =
-        document.querySelectorAll(".nav button")[2];
-
-    document.querySelectorAll(".nav button")
-        .forEach(b =>
-            b.classList.remove("active")
-        );
-
-    button.classList.add("active");
-};
 
 
 /* =========================
@@ -1427,12 +1310,13 @@ let schedule = {
     Tuesday:[],
     Wednesday:[],
     Thursday:[],
-    Friday:[]
-
+    Friday:[],
+    Saturday:[],
+    Sunday:[]
 };
 
-let editingDay = null;
-let editingIndex = null;
+let editingDay=null;
+let editingIndex=null;
 
 
 function loadSchedule(){
@@ -1445,23 +1329,49 @@ function loadSchedule(){
     if(saved){
 
         try{
-
-            schedule =
-                JSON.parse(saved);
-
+            schedule=JSON.parse(saved);
         }catch{
-
-            schedule = {
-                Monday:[],
-                Tuesday:[],
-                Wednesday:[],
-                Thursday:[],
-                Friday:[]
-            };
+            resetSchedule();
         }
     }
 
+    ensureAllDays();
+
     renderSchedule();
+}
+
+
+function resetSchedule(){
+
+    schedule={
+        Monday:[],
+        Tuesday:[],
+        Wednesday:[],
+        Thursday:[],
+        Friday:[],
+        Saturday:[],
+        Sunday:[]
+    };
+}
+
+
+function ensureAllDays(){
+
+    [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ].forEach(day=>{
+
+        if(!Array.isArray(schedule[day])){
+            schedule[day]=[];
+        }
+
+    });
 }
 
 
@@ -1477,9 +1387,11 @@ function saveSchedule(){
 function renderSchedule(){
 
     document.querySelectorAll(".classes")
-        .forEach(box =>
-            box.innerHTML=""
-        );
+        .forEach(box=>{
+            box.innerHTML="";
+        });
+
+    let total=0;
 
     for(const day in schedule){
 
@@ -1493,9 +1405,7 @@ function renderSchedule(){
         if(schedule[day].length===0){
 
             box.innerHTML =
-                `<div class="empty-day">
-                    No classes
-                </div>`;
+                `<div class="empty">No classes</div>`;
 
             continue;
         }
@@ -1503,11 +1413,12 @@ function renderSchedule(){
         schedule[day].forEach(
             (item,index)=>{
 
+                total++;
+
                 const div =
                     document.createElement("div");
 
-                div.className =
-                    "class-item";
+                div.className="class-item";
 
                 div.innerHTML=`
 
@@ -1525,8 +1436,12 @@ function renderSchedule(){
 
                     ${
                         item.room
-                        ? `<small>Room: ${escapeHTML(item.room)}</small>`
-                        : ""
+                        ?
+                        `<small>
+                            Room: ${escapeHTML(item.room)}
+                         </small>`
+                        :
+                        ""
                     }
 
                     <div class="class-actions">
@@ -1550,12 +1465,23 @@ function renderSchedule(){
             }
         );
     }
+
+    document.getElementById("totalClasses")
+        .textContent=total;
+
+    const today =
+        new Date().toLocaleDateString(
+            "en-US",
+            {weekday:"long"}
+        );
+
+    document.getElementById("todayClasses")
+        .textContent=
+        schedule[today]
+        ? schedule[today].length
+        : 0;
 }
 
-
-/* =========================
-   EDITOR
-========================= */
 
 window.openEditor =
 function(day,index=null){
@@ -1604,20 +1530,14 @@ function(day,index=null){
             .value="";
     }
 
-    openPage(
-        "editorPage",
-        null
-    );
+    openPage("editorPage",null);
 };
 
 
 window.editClass =
 function(day,index){
 
-    openEditor(
-        day,
-        index
-    );
+    openEditor(day,index);
 };
 
 
@@ -1628,43 +1548,33 @@ function(){
         document.getElementById("dayInput")
         .value;
 
-    const time =
-        document.getElementById("timeInput")
-        .value.trim();
+    const item={
 
-    const subject =
-        document.getElementById("subjectInput")
-        .value.trim();
+        time:
+            document.getElementById("timeInput")
+            .value.trim(),
 
-    const teacher =
-        document.getElementById("teacherInput")
-        .value.trim();
+        subject:
+            document.getElementById("subjectInput")
+            .value.trim(),
 
-    const room =
-        document.getElementById("roomInput")
-        .value.trim();
+        teacher:
+            document.getElementById("teacherInput")
+            .value.trim(),
 
-    if(!time || !subject){
+        room:
+            document.getElementById("roomInput")
+            .value.trim()
+    };
+
+    if(!item.time || !item.subject){
 
         showToast(
-            "Enter the time and subject."
+            "Time and subject are required."
         );
 
         return;
     }
-
-    const item={
-
-        time,
-
-        subject,
-
-        teacher:
-            teacher || "Teacher not added",
-
-        room
-    };
-
 
     if(
         editingDay !== null &&
@@ -1695,7 +1605,6 @@ function(){
     }
 
     saveSchedule();
-
     renderSchedule();
 
     editingDay=null;
@@ -1720,7 +1629,6 @@ function(day,index){
         .splice(index,1);
 
     saveSchedule();
-
     renderSchedule();
 
     showToast(
@@ -1729,25 +1637,74 @@ function(day,index){
 };
 
 
-/* =========================
-   SEARCH
-========================= */
+window.goSchedule =
+function(){
+
+    const button =
+        document.querySelectorAll(
+            ".nav button"
+        )[1];
+
+    openPage(
+        "schedulePage",
+        button
+    );
+};
+
+
+window.goAddClass =
+function(){
+
+    openEditor("Monday");
+
+    document.querySelectorAll(".nav button")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    document.querySelectorAll(
+        ".nav button"
+    )[2].classList.add("active");
+};
+
+
+window.openPage =
+function(pageId,button){
+
+    document.querySelectorAll(".page")
+        .forEach(page =>
+            page.classList.remove("active")
+        );
+
+    document.getElementById(pageId)
+        .classList.add("active");
+
+    document.querySelectorAll(".nav button")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    if(button){
+        button.classList.add("active");
+    }
+};
+
 
 window.searchClasses =
 function(){
 
     const query =
-        document.getElementById("search")
+        document.getElementById("searchInput")
         .value
         .toLowerCase();
 
     document.querySelectorAll(".class-item")
-        .forEach(item => {
+        .forEach(item=>{
 
             item.style.display =
                 item.textContent
-                    .toLowerCase()
-                    .includes(query)
+                .toLowerCase()
+                .includes(query)
                 ? "block"
                 : "none";
         });
@@ -1758,22 +1715,7 @@ function(){
    PIN
 ========================= */
 
-function checkPin(){
-
-    const pin =
-        localStorage.getItem("pinkSchedulePin");
-
-    if(!pin){
-
-        setTimeout(
-            setupPin,
-            500
-        );
-    }
-}
-
-
-window.setupPin =
+window.openPinModal =
 function(){
 
     document.getElementById("pinModal")
@@ -1787,7 +1729,7 @@ function(){
 };
 
 
-window.closePin =
+window.closePinModal =
 function(){
 
     document.getElementById("pinModal")
@@ -1809,16 +1751,16 @@ function(){
     if(!/^\d{4,6}$/.test(pin)){
 
         showToast(
-            "PIN must contain 4–6 digits."
+            "PIN must be 4–6 digits."
         );
 
         return;
     }
 
-    if(pin !== confirmPin){
+    if(pin!==confirmPin){
 
         showToast(
-            "PINs do not match."
+            "The PINs do not match."
         );
 
         return;
@@ -1829,7 +1771,7 @@ function(){
         pin
     );
 
-    closePin();
+    closePinModal();
 
     showToast(
         "PIN saved on this device ♡"
@@ -1844,9 +1786,7 @@ function(){
 window.toggleTheme =
 function(){
 
-    document.body.classList.toggle(
-        "dark"
-    );
+    document.body.classList.toggle("dark");
 
     localStorage.setItem(
         "pinkDark",
@@ -1858,14 +1798,11 @@ function(){
 
 
 if(
-    localStorage.getItem(
-        "pinkDark"
-    )==="true"
+    localStorage.getItem("pinkDark")
+    ==="true"
 ){
 
-    document.body.classList.add(
-        "dark"
-    );
+    document.body.classList.add("dark");
 }
 
 
@@ -1882,12 +1819,9 @@ function showToast(message){
 
     toast.style.display="block";
 
-    setTimeout(
-        ()=>{
-            toast.style.display="none";
-        },
-        3000
-    );
+    setTimeout(()=>{
+        toast.style.display="none";
+    },2800);
 }
 
 
