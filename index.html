@@ -1,5 +1,2009 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#f58ab1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Pink Schedule">
+
+<title>Pink Schedule</title>
+
+<style>
+
 /* =========================================================
-   GOOGLE LOGIN - FIXED
+   BASIC
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+
+:root{
+    --pink:#f58ab1;
+    --pink-dark:#df6994;
+    --pink-soft:#fff1f6;
+    --bg:#fff9fb;
+    --card:#ffffff;
+    --text:#342c30;
+    --muted:#9b8f94;
+    --border:#f3d9e4;
+    --danger:#df6877;
+    --shadow:0 12px 35px rgba(245,138,177,.14);
+}
+
+body.dark{
+    --bg:#171316;
+    --card:#241d21;
+    --text:#ffffff;
+    --muted:#aaa;
+    --border:#46333b;
+    --pink-soft:#302228;
+    --shadow:none;
+}
+
+body{
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-tap-highlight-color:transparent;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+input,
+select{
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#loginPage{
+    min-height:100vh;
+    min-height:100dvh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:
+        max(20px,env(safe-area-inset-top))
+        max(20px,env(safe-area-inset-right))
+        max(20px,env(safe-area-inset-bottom))
+        max(20px,env(safe-area-inset-left));
+
+    background:linear-gradient(
+        145deg,
+        #fff5f9,
+        #ffdbe8
+    );
+}
+
+.login-card{
+    width:100%;
+    max-width:390px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+    border-radius:28px;
+
+    padding:30px 24px;
+
+    box-shadow:var(--shadow);
+}
+
+.logo{
+    width:72px;
+    height:72px;
+
+    border-radius:22px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--pink);
+
+    color:#fff;
+
+    font-size:34px;
+}
+
+.login-card h1{
+    color:var(--pink);
+    text-align:center;
+
+    margin-top:15px;
+}
+
+.login-card > p{
+    color:var(--muted);
+    text-align:center;
+
+    font-size:14px;
+
+    margin:8px 0 20px;
+}
+
+
+/* GOOGLE BUTTON */
+
+.google-btn{
+    width:100%;
+    min-height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-weight:700;
+}
+
+.google-logo{
+    width:20px;
+    height:20px;
+    flex-shrink:0;
+}
+
+
+/* INPUTS */
+
+.input-wrap{
+    position:relative;
+    width:100%;
+    margin-bottom:10px;
+}
+
+.input-wrap input{
+    margin:0;
+}
+
+input,
+select{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    background:var(--card);
+    color:var(--text);
+
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:var(--pink);
+}
+
+
+/* PASSWORD EYE */
+
+.password-wrap input{
+    padding-right:50px;
+}
+
+.eye-btn{
+    position:absolute;
+
+    right:7px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    background:transparent;
+
+    color:var(--muted);
+
+    font-size:17px;
+}
+
+
+/* MAIN BUTTON */
+
+.main-btn{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+    border-radius:13px;
+
+    background:var(--pink);
+    color:white;
+
+    font-weight:700;
+}
+
+
+/* LINKS */
+
+.login-actions{
+    display:flex;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-top:12px;
+}
+
+.link-btn{
+    border:none;
+    background:none;
+
+    color:var(--pink-dark);
+
+    font-size:12px;
+    font-weight:700;
+
+    padding:6px;
+}
+
+.phone-link{
+    width:100%;
+    margin-top:8px;
+}
+
+
+/* PHONE LOGIN */
+
+.phone-box{
+    display:none;
+
+    margin-top:18px;
+    padding-top:18px;
+
+    border-top:1px solid var(--border);
+}
+
+.phone-box h3{
+    color:var(--pink-dark);
+
+    margin-bottom:6px;
+}
+
+.phone-box p{
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-bottom:12px;
+}
+
+.phone-code{
+    display:none;
+    margin-top:10px;
+}
+
+#recaptcha-container{
+    margin:10px 0;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app{
+    display:none;
+
+    min-height:100vh;
+
+    padding-bottom:
+        calc(82px + env(safe-area-inset-bottom));
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+
+    z-index:20;
+
+    height:68px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 20px;
+}
+
+.brand{
+    color:var(--pink);
+
+    font-size:20px;
+
+    font-weight:800;
+}
+
+.theme-btn{
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:11px;
+
+    background:var(--pink-soft);
+    color:var(--pink-dark);
+
+    font-size:18px;
+}
+
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+.container{
+    width:92%;
+    max-width:1100px;
+
+    margin:24px auto;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        var(--pink),
+        #ffb4d0
+    );
+
+    color:white;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    margin-bottom:18px;
+}
+
+.hero small{
+    opacity:.85;
+}
+
+.hero h1{
+    margin:7px 0;
+}
+
+.hero p{
+    font-size:14px;
+}
+
+.home-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:24px;
+}
+
+.home-card h2{
+    color:var(--pink-dark);
+
+    margin-bottom:8px;
+}
+
+.home-card p{
+    color:var(--muted);
+
+    font-size:14px;
+
+    margin-bottom:20px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+}
+
+.stat{
+    background:var(--pink-soft);
+
+    border-radius:16px;
+
+    padding:18px;
+
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+
+    color:var(--pink-dark);
+
+    font-size:24px;
+}
+
+.stat span{
+    color:var(--muted);
+
+    font-size:12px;
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+.schedule-head{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:15px;
+}
+
+.schedule-head h2{
+    color:var(--pink-dark);
+}
+
+.schedule-actions{
+    display:flex;
+    gap:8px;
+}
+
+.view-mode-btn,
+.edit-mode-btn{
+    padding:11px 15px;
+
+    border:none;
+
+    border-radius:11px;
+
+    font-weight:700;
+}
+
+.view-mode-btn{
+    background:var(--pink-soft);
+    color:var(--pink-dark);
+}
+
+.edit-mode-btn{
+    background:var(--pink);
+    color:white;
+}
+
+.search{
+    margin-bottom:15px;
+}
+
+.week{
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:9px;
+}
+
+.day{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:12px;
+
+    min-height:250px;
+}
+
+.day-title{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:12px;
+}
+
+.day-title h3{
+    color:var(--pink-dark);
+
+    font-size:12px;
+}
+
+.add-btn{
+    display:none;
+
+    width:28px;
+    height:28px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:var(--pink-soft);
+    color:var(--pink-dark);
+
+    font-size:18px;
+}
+
+.editing .add-btn{
+    display:block;
+}
+
+.class-item{
+    background:var(--pink-soft);
+
+    border-left:3px solid var(--pink);
+
+    border-radius:11px;
+
+    padding:10px;
+
+    margin-bottom:8px;
+}
+
+.class-item .time{
+    color:var(--pink-dark);
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.class-item strong{
+    display:block;
+
+    font-size:12px;
+
+    margin:4px 0;
+}
+
+.class-item small{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:2px;
+}
+
+.class-actions{
+    display:none;
+
+    gap:5px;
+
+    margin-top:8px;
+}
+
+.editing .class-actions{
+    display:flex;
+}
+
+.edit-btn,
+.delete-btn{
+    padding:6px 8px;
+
+    border:none;
+
+    border-radius:7px;
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+.edit-btn{
+    background:white;
+
+    color:var(--pink-dark);
+}
+
+.delete-btn{
+    background:white;
+
+    color:var(--danger);
+}
+
+.empty{
+    text-align:center;
+
+    color:#b7aaaf;
+
+    font-size:11px;
+
+    padding-top:30px;
+}
+
+
+/* =========================================================
+   EDITOR
+========================================================= */
+
+.form-card{
+    max-width:500px;
+
+    margin:auto;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:24px;
+}
+
+.form-card h2{
+    color:var(--pink-dark);
+
+    margin-bottom:7px;
+}
+
+.form-card p{
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:16px;
+}
+
+.form-buttons{
+    display:flex;
+
+    gap:10px;
+}
+
+.form-buttons button{
+    flex:1;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:700;
+}
+
+.cancel-btn{
+    background:var(--pink-soft);
+
+    color:var(--pink-dark);
+}
+
+.save-btn{
+    background:var(--pink);
+
+    color:white;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-card{
+    max-width:430px;
+
+    margin:auto;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:28px;
+
+    text-align:center;
+}
+
+.avatar{
+    width:82px;
+    height:82px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:var(--pink);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:34px;
+}
+
+.profile-card h2{
+    color:var(--pink-dark);
+
+    margin-top:12px;
+}
+
+.profile-card p{
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:4px;
+}
+
+.profile-actions{
+    margin-top:20px;
+
+    display:grid;
+
+    gap:9px;
+}
+
+.pin-btn,
+.logout-btn{
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:700;
+}
+
+.pin-btn{
+    background:var(--pink-soft);
+
+    color:var(--pink-dark);
+}
+
+.logout-btn{
+    background:#eee;
+
+    color:#555;
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.bottom-nav{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:30;
+
+    height:
+        calc(72px + env(safe-area-inset-bottom));
+
+    padding-bottom:
+        env(safe-area-inset-bottom);
+
+    background:var(--card);
+
+    border-top:1px solid var(--border);
+}
+
+.nav{
+    height:72px;
+
+    max-width:600px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+}
+
+.nav button{
+    border:none;
+
+    background:transparent;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.nav button span{
+    display:block;
+
+    font-size:20px;
+
+    margin-bottom:3px;
+}
+
+.nav button.active{
+    color:var(--pink-dark);
+}
+
+
+/* =========================================================
+   PIN MODAL
+========================================================= */
+
+.modal{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.55);
+}
+
+.modal-card{
+    width:100%;
+
+    max-width:360px;
+
+    background:var(--card);
+
+    border-radius:22px;
+
+    padding:24px;
+}
+
+.modal-card h2{
+    color:var(--pink-dark);
+
+    margin-bottom:7px;
+}
+
+.modal-card p{
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+.pin-input{
+    text-align:center;
+
+    letter-spacing:7px;
+
+    font-size:21px;
+}
+
+.close-modal{
+    width:100%;
+
+    margin-top:9px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--pink-soft);
+
+    color:var(--pink-dark);
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    display:none;
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:
+        calc(88px + env(safe-area-inset-bottom));
+
+    transform:translateX(-50%);
+
+    z-index:200;
+
+    background:var(--card);
+
+    border-left:4px solid var(--pink);
+
+    color:var(--text);
+
+    padding:12px 17px;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+    max-width:90%;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:950px){
+
+    .week{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    .week{
+        grid-template-columns:1fr;
+    }
+
+    .day{
+        min-height:120px;
+    }
+
+    .schedule-head{
+        display:block;
+    }
+
+    .schedule-actions{
+        margin-top:12px;
+    }
+
+    .search{
+        max-width:none;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:450px){
+
+    .login-actions{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     LOGIN PAGE
+========================================================= -->
+
+<section id="loginPage">
+
+<div class="login-card">
+
+    <div class="logo">
+        ♡
+    </div>
+
+    <h1>
+        Pink Schedule
+    </h1>
+
+    <p>
+        Simple. Private. Organized.
+    </p>
+
+
+    <!-- GOOGLE -->
+
+    <button
+        class="google-btn"
+        id="googleButton">
+
+        <svg
+            class="google-logo"
+            viewBox="0 0 24 24"
+            aria-hidden="true">
+
+            <path
+                fill="#4285F4"
+                d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+
+            <path
+                fill="#34A853"
+                d="M12 21.6c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.75 9.75 0 0 0 12 21.6z"/>
+
+            <path
+                fill="#FBBC05"
+                d="M6.54 13.69A5.86 5.86 0 0 1 6.24 12c0-.59.1-1.17.3-1.69V7.78H3.3A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.05 4.22l3.24-2.53z"/>
+
+            <path
+                fill="#EA4335"
+                d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.36 14.63 2.4 12 2.4a9.75 9.75 0 0 0-8.7 5.38l3.24 2.53C7.31 8 9.46 6.28 12 6.28z"/>
+
+        </svg>
+
+        Continue with Google
+
+    </button>
+
+
+    <div class="divider">
+        or
+    </div>
+
+
+    <!-- EMAIL -->
+
+    <div class="input-wrap">
+
+        <input
+            id="emailInput"
+            type="email"
+            autocomplete="email"
+            placeholder="Email">
+
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="input-wrap password-wrap">
+
+        <input
+            id="passwordInput"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Password">
+
+        <button
+            type="button"
+            class="eye-btn"
+            id="passwordEye">
+
+            👁
+
+        </button>
+
+    </div>
+
+
+    <button
+        class="main-btn"
+        id="loginButton">
+
+        Sign In
+
+    </button>
+
+
+    <div class="login-actions">
+
+        <button
+            class="link-btn"
+            id="createAccountButton">
+
+            Create Account
+
+        </button>
+
+
+        <button
+            class="link-btn"
+            id="resetPasswordButton">
+
+            Forgot Password?
+
+        </button>
+
+    </div>
+
+
+    <!-- PHONE LOGIN -->
+
+    <button
+        class="link-btn phone-link"
+        id="phoneToggle">
+
+        Use phone number instead
+
+    </button>
+
+
+    <div
+        class="phone-box"
+        id="phoneBox">
+
+        <h3>
+            Sign in with phone
+        </h3>
+
+        <p>
+            Enter your number like 09123456789. We'll send a verification code by SMS.
+        </p>
+
+
+        <input
+            id="phoneInput"
+            type="tel"
+            inputmode="numeric"
+            autocomplete="tel"
+            maxlength="11"
+            placeholder="09XXXXXXXXX">
+
+
+        <div
+            id="recaptcha-container">
+        </div>
+
+
+        <button
+            class="main-btn"
+            id="sendCodeButton"
+            type="button">
+
+            Send Code
+
+        </button>
+
+        <button
+            class="link-btn phone-link"
+            id="showCodeButton"
+            type="button">
+
+            Enter Verification Code
+
+        </button>
+
+
+        <div
+            class="phone-code"
+            id="phoneCodeBox">
+
+            <input
+                id="smsCodeInput"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="6"
+                placeholder="6-digit code">
+
+
+            <button
+                class="main-btn"
+                id="verifyCodeButton"
+                type="button">
+
+                Verify Code
+
+            </button>
+
+            <button
+                class="link-btn phone-link"
+                id="resendCodeButton"
+                type="button">
+
+                Resend Code
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     APP
+========================================================= -->
+
+<section id="app">
+
+<header class="topbar">
+
+    <div class="brand">
+        Pink Schedule ♡
+    </div>
+
+
+    <button
+        class="theme-btn"
+        id="themeButton">
+
+        ☾
+
+    </button>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =========================================================
+     HOME
+========================================================= -->
+
+<section
+    id="homePage"
+    class="page active">
+
+    <div class="hero">
+
+        <small>
+            WELCOME BACK
+        </small>
+
+        <h1>
+            Hi,
+            <span id="userName">
+                Student
+            </span>
+            ♡
+        </h1>
+
+        <p>
+            Everything for your week, in one place.
+        </p>
+
+    </div>
+
+
+    <div class="home-card">
+
+        <h2>
+            Weekly Overview
+        </h2>
+
+        <p>
+            View your schedule normally, or tap
+            Edit Schedule when you want to change it.
+        </p>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <strong
+                    id="totalClasses">
+                    0
+                </strong>
+
+                <span>
+                    Total Classes
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    7
+                </strong>
+
+                <span>
+                    Days
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong
+                    id="todayClasses">
+                    0
+                </strong>
+
+                <span>
+                    Today
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SCHEDULE
+========================================================= -->
+
+<section
+    id="schedulePage"
+    class="page">
+
+    <div class="schedule-head">
+
+        <h2>
+            My Schedule
+        </h2>
+
+
+        <div class="schedule-actions">
+
+            <button
+                class="view-mode-btn"
+                id="viewButton">
+
+                View
+
+            </button>
+
+
+            <button
+                class="edit-mode-btn"
+                id="editButton">
+
+                Edit Schedule
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <input
+        id="searchInput"
+        class="search"
+        type="search"
+        placeholder="Search classes...">
+
+
+    <div
+        id="scheduleContainer"
+        class="week">
+
+
+        <!-- MONDAY -->
+
+        <div
+            class="day"
+            data-day="Monday">
+
+            <div class="day-title">
+
+                <h3>
+                    MONDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Monday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+
+        <!-- TUESDAY -->
+
+        <div
+            class="day"
+            data-day="Tuesday">
+
+            <div class="day-title">
+
+                <h3>
+                    TUESDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Tuesday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+
+        <!-- WEDNESDAY -->
+
+        <div
+            class="day"
+            data-day="Wednesday">
+
+            <div class="day-title">
+
+                <h3>
+                    WEDNESDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Wednesday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+
+        <!-- THURSDAY -->
+
+        <div
+            class="day"
+            data-day="Thursday">
+
+            <div class="day-title">
+
+                <h3>
+                    THURSDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Thursday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+
+        <!-- FRIDAY -->
+
+        <div
+            class="day"
+            data-day="Friday">
+
+            <div class="day-title">
+
+                <h3>
+                    FRIDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Friday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+
+        <!-- SATURDAY -->
+
+        <div
+            class="day"
+            data-day="Saturday">
+
+            <div class="day-title">
+
+                <h3>
+                    SATURDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Saturday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+
+        <!-- SUNDAY -->
+
+        <div
+            class="day"
+            data-day="Sunday">
+
+            <div class="day-title">
+
+                <h3>
+                    SUNDAY
+                </h3>
+
+                <button
+                    class="add-btn"
+                    data-add="Sunday">
+
+                    +
+
+                </button>
+
+            </div>
+
+            <div class="classes"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EDITOR
+========================================================= -->
+
+<section
+    id="editorPage"
+    class="page">
+
+    <div class="form-card">
+
+        <h2 id="editorTitle">
+            Add Class
+        </h2>
+
+        <p>
+            Enter your class details.
+        </p>
+
+
+        <select id="dayInput">
+
+            <option value="Monday">
+                Monday
+            </option>
+
+            <option value="Tuesday">
+                Tuesday
+            </option>
+
+            <option value="Wednesday">
+                Wednesday
+            </option>
+
+            <option value="Thursday">
+                Thursday
+            </option>
+
+            <option value="Friday">
+                Friday
+            </option>
+
+            <option value="Saturday">
+                Saturday
+            </option>
+
+            <option value="Sunday">
+                Sunday
+            </option>
+
+        </select>
+
+
+        <input
+            id="timeInput"
+            type="text"
+            placeholder="Time">
+
+
+        <input
+            id="subjectInput"
+            type="text"
+            placeholder="Subject">
+
+
+        <input
+            id="teacherInput"
+            type="text"
+            placeholder="Teacher">
+
+
+        <input
+            id="roomInput"
+            type="text"
+            placeholder="Room">
+
+
+        <div class="form-buttons">
+
+            <button
+                class="cancel-btn"
+                id="cancelEditor">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                class="save-btn"
+                id="saveClassButton">
+
+                Save Class
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROFILE
+========================================================= -->
+
+<section
+    id="profilePage"
+    class="page">
+
+    <div class="profile-card">
+
+        <div class="avatar">
+            ♡
+        </div>
+
+
+        <h2 id="profileName">
+            Student
+        </h2>
+
+
+        <p id="profileEmail">
+            —
+        </p>
+
+
+        <div class="profile-actions">
+
+            <button
+                class="pin-btn"
+                id="pinButton">
+
+                Set / Change PIN
+
+            </button>
+
+
+            <!-- FIXED LOGOUT BUTTON -->
+
+            <button
+                type="button"
+                class="logout-btn"
+                id="logoutButton"
+                onclick="logOutNow()">
+
+                Log Out
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- =========================================================
+     BOTTOM NAV
+========================================================= -->
+
+<nav class="bottom-nav">
+
+<div class="nav">
+
+    <button
+        class="active"
+        data-page="homePage">
+
+        <span>
+            ⌂
+        </span>
+
+        Home
+
+    </button>
+
+
+    <button
+        data-page="schedulePage">
+
+        <span>
+            ▦
+        </span>
+
+        Schedule
+
+    </button>
+
+
+    <button
+        data-add-nav>
+
+        <span>
+            ＋
+        </span>
+
+        Add
+
+    </button>
+
+
+    <button
+        data-page="profilePage">
+
+        <span>
+            ○
+        </span>
+
+        Account
+
+    </button>
+
+</div>
+
+</nav>
+
+</section>
+
+
+<!-- =========================================================
+     PIN MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="pinModal">
+
+<div class="modal-card">
+
+    <h2>
+        Set Your PIN
+    </h2>
+
+    <p>
+        Use a 4–6 digit PIN for this device.
+    </p>
+
+
+    <input
+        id="pinInput"
+        class="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        autocomplete="new-password"
+        placeholder="••••••">
+
+
+    <input
+        id="pinConfirm"
+        class="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        autocomplete="new-password"
+        placeholder="Confirm PIN">
+
+
+    <button
+        class="main-btn"
+        id="savePinButton">
+
+        Save PIN
+
+    </button>
+
+
+    <button
+        class="close-modal"
+        id="closePinButton">
+
+        Cancel
+
+    </button>
+
+</div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    signOut,
+    setPersistence,
+    browserLocalPersistence,
+    RecaptchaVerifier,
+    signInWithPhoneNumber
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCx_Rkir6aQiga4GBrP1o0zY2TGFZX_SMQ",
+
+    authDomain:
+        "pink-schedule.firebaseapp.com",
+
+    projectId:
+        "pink-schedule",
+
+    storageBucket:
+        "pink-schedule.firebasestorage.app",
+
+    messagingSenderId:
+        "180291511614",
+
+    appId:
+        "1:180291511614:web:3f764d6d0cad151decb86f",
+
+    measurementId:
+        "G-LK35WM0GH7"
+};
+
+
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
+
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(firebaseApp);
+
+const googleProvider =
+    new GoogleAuthProvider();
+
+
+setPersistence(
+    auth,
+    browserLocalPersistence
+).catch(error => {
+
+    console.error(
+        "Firebase persistence error:",
+        error
+    );
+});
+
+
+/* =========================================================
+   GOOGLE LOGIN
 ========================================================= */
 
 const googleButton =
@@ -9,7 +2013,7 @@ googleButton.addEventListener(
     "click",
     async () => {
 
-        if (!navigator.onLine) {
+        if(!navigator.onLine){
 
             showToast(
                 "Connect to the internet to use Google Sign-In."
@@ -21,163 +2025,2020 @@ googleButton.addEventListener(
         googleButton.disabled = true;
 
         googleButton.innerHTML = `
-            <svg
-                class="google-logo"
-                viewBox="0 0 24 24"
-                aria-hidden="true">
-
-                <path
-                    fill="#4285F4"
-                    d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
-
-                <path
-                    fill="#34A853"
-                    d="M12 21.6c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.75 9.75 0 0 0 12 21.6z"/>
-
-                <path
-                    fill="#FBBC05"
-                    d="M6.54 13.69A5.86 5.86 0 0 1 6.24 12c0-.59.1-1.17.3-1.69V7.78H3.3A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.05 4.22l3.24-2.53z"/>
-
-                <path
-                    fill="#EA4335"
-                    d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.36 14.63 2.4 12 2.4a9.75 9.75 0 0 0-8.7 5.38l3.24 2.53C7.31 8 9.46 6.28 12 6.28z"/>
-
+            <svg class="google-logo" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4" d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+                <path fill="#34A853" d="M12 21.6c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.75 9.75 0 0 0 12 21.6z"/>
+                <path fill="#FBBC05" d="M6.54 13.69A5.86 5.86 0 0 1 6.24 12c0-.59.1-1.17.3-1.69V7.78H3.3A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.05 4.22l3.24-2.53z"/>
+                <path fill="#EA4335" d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.36 14.63 2.4 12 2.4a9.75 9.75 0 0 0-8.7 5.38l3.24 2.53C7.31 8 9.46 6.28 12 6.28z"/>
             </svg>
-
             Connecting to Google...
         `;
 
+        try{
 
-        try {
-
-            const result =
-                await signInWithPopup(
-                    auth,
-                    googleProvider
-                );
-
-            console.log(
-                "Google sign-in successful:",
-                result.user.uid
+            await signInWithPopup(
+                auth,
+                googleProvider
             );
 
-            showToast(
-                "Google sign-in successful ♡"
-            );
-
-
-        } catch (error) {
+        }catch(error){
 
             console.error(
                 "GOOGLE LOGIN ERROR:",
                 error
             );
 
-            switch(error.code){
-
-                case "auth/popup-blocked":
-
-                    showToast(
-                        "Google popup was blocked. Allow popups for this site."
-                    );
-
-                    break;
-
-
-                case "auth/popup-closed-by-user":
-
-                    showToast(
-                        "Google sign-in was cancelled."
-                    );
-
-                    break;
-
-
-                case "auth/unauthorized-domain":
-
-                    showToast(
-                        "Your GitHub Pages domain is not authorized in Firebase."
-                    );
-
-                    break;
-
-
-                case "auth/operation-not-allowed":
-
-                    showToast(
-                        "Google Sign-In is not enabled in Firebase."
-                    );
-
-                    break;
-
-
-                case "auth/invalid-oauth-client-id":
-
-                    showToast(
-                        "Google OAuth settings need to be fixed in Firebase."
-                    );
-
-                    break;
-
-
-                case "auth/cancelled-popup-request":
-
-                    showToast(
-                        "Please click Google Sign-In only once."
-                    );
-
-                    break;
-
-
-                case "auth/network-request-failed":
-
-                    showToast(
-                        "Check your internet connection."
-                    );
-
-                    break;
-
-
-                default:
-
-                    showToast(
-                        "Google error: " +
-                        (error.code || "unknown")
-                    );
-            }
-
-
-        } finally {
+            showToast(
+                googleError(error)
+            );
+        }finally{
 
             googleButton.disabled = false;
 
             googleButton.innerHTML = `
-
-                <svg
-                    class="google-logo"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
-
-                    <path
-                        fill="#4285F4"
-                        d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
-
-                    <path
-                        fill="#34A853"
-                        d="M12 21.6c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.75 9.75 0 0 0 12 21.6z"/>
-
-                    <path
-                        fill="#FBBC05"
-                        d="M6.54 13.69A5.86 5.86 0 0 1 6.24 12c0-.59.1-1.17.3-1.69V7.78H3.3A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.05 4.22l3.24-2.53z"/>
-
-                    <path
-                        fill="#EA4335"
-                        d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.36 14.63 2.4 12 2.4a9.75 9.75 0 0 0-8.7 5.38l3.24 2.53C7.31 8 9.46 6.28 12 6.28z"/>
-
+                <svg class="google-logo" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#4285F4" d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+                    <path fill="#34A853" d="M12 21.6c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.75 9.75 0 0 0 12 21.6z"/>
+                    <path fill="#FBBC05" d="M6.54 13.69A5.86 5.86 0 0 1 6.24 12c0-.59.1-1.17.3-1.69V7.78H3.3A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.05 4.22l3.24-2.53z"/>
+                    <path fill="#EA4335" d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.36 14.63 2.4 12 2.4a9.75 9.75 0 0 0-8.7 5.38l3.24 2.53C7.31 8 9.46 6.28 12 6.28z"/>
                 </svg>
-
                 Continue with Google
             `;
         }
     }
 );
+
+function googleError(error){
+
+    switch(error.code){
+
+        case "auth/popup-blocked":
+            return "Google popup was blocked. Allow popups for this site.";
+
+        case "auth/popup-closed-by-user":
+            return "Google sign-in was cancelled.";
+
+        case "auth/unauthorized-domain":
+            return "This website is not authorized in Firebase.";
+
+        case "auth/operation-not-allowed":
+            return "Google Sign-In is not enabled in Firebase.";
+
+        case "auth/invalid-oauth-client-id":
+            return "Google OAuth settings need to be fixed in Firebase.";
+
+        case "auth/account-exists-with-different-credential":
+            return "That email already uses another sign-in method.";
+
+        case "auth/network-request-failed":
+            return "Check your internet connection.";
+
+        default:
+            return "Google error: " + (error.code || "unknown");
+    }
+}
+
+/* =========================================================
+   EMAIL LOGIN
+========================================================= */
+
+document
+    .getElementById("loginButton")
+    .addEventListener(
+        "click",
+        async () => {
+
+            const email =
+                document
+                .getElementById(
+                    "emailInput"
+                )
+                .value
+                .trim();
+
+            const password =
+                document
+                .getElementById(
+                    "passwordInput"
+                )
+                .value;
+
+
+            if(!email || !password){
+
+                showToast(
+                    "Enter your email and password."
+                );
+
+                return;
+            }
+
+
+            try{
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                showToast(
+                    firebaseError(error)
+                );
+            }
+        }
+    );
+
+
+/* =========================================================
+   CREATE ACCOUNT
+========================================================= */
+
+document
+    .getElementById(
+        "createAccountButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const email =
+                document
+                .getElementById(
+                    "emailInput"
+                )
+                .value
+                .trim();
+
+            const password =
+                document
+                .getElementById(
+                    "passwordInput"
+                )
+                .value;
+
+
+            if(!email || !password){
+
+                showToast(
+                    "Enter an email and password first."
+                );
+
+                return;
+            }
+
+
+            if(password.length < 6){
+
+                showToast(
+                    "Password must be at least 6 characters."
+                );
+
+                return;
+            }
+
+
+            try{
+
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                showToast(
+                    firebaseError(error)
+                );
+            }
+        }
+    );
+
+
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+document
+    .getElementById(
+        "resetPasswordButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const email =
+                document
+                .getElementById(
+                    "emailInput"
+                )
+                .value
+                .trim();
+
+
+            if(!email){
+
+                showToast(
+                    "Enter your email first."
+                );
+
+                return;
+            }
+
+
+            try{
+
+                await sendPasswordResetEmail(
+                    auth,
+                    email
+                );
+
+                showToast(
+                    "Password reset email sent ♡"
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                showToast(
+                    firebaseError(error)
+                );
+            }
+        }
+    );
+
+
+/* =========================================================
+   PASSWORD EYE — SHOW 1 SECOND
+========================================================= */
+
+let eyeTimer = null;
+
+document
+    .getElementById("passwordEye")
+    .addEventListener(
+        "click",
+        () => {
+
+            const password =
+                document.getElementById(
+                    "passwordInput"
+                );
+
+            const eye =
+                document.getElementById(
+                    "passwordEye"
+                );
+
+
+            clearTimeout(
+                eyeTimer
+            );
+
+
+            password.type =
+                "text";
+
+            eye.textContent =
+                "🙈";
+
+
+            eyeTimer =
+                setTimeout(
+                    () => {
+
+                        password.type =
+                            "password";
+
+                        eye.textContent =
+                            "👁";
+
+                    },
+                    1000
+                );
+        }
+    );
+
+
+/* =========================================================
+   PHONE LOGIN
+========================================================= */
+
+let recaptchaVerifier = null;
+let phoneConfirmation = null;
+
+
+document
+    .getElementById(
+        "phoneToggle"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            const box =
+                document.getElementById(
+                    "phoneBox"
+                );
+
+
+            if(box.style.display === "block"){
+
+                box.style.display =
+                    "none";
+
+                return;
+            }
+
+
+            box.style.display =
+                "block";
+
+
+            setupRecaptcha();
+        }
+    );
+
+
+showCodeButton.addEventListener(
+    "click",
+    () => {
+
+        phoneCodeBox.style.display = "block";
+
+        smsCodeInput.focus();
+
+        showToast(
+            "Enter the 6-digit verification code ♡"
+        );
+    }
+);
+
+
+resendCodeButton.addEventListener(
+    "click",
+    async () => {
+
+        const rawPhone = phoneInput.value.trim();
+        const digits = rawPhone.replace(/\D/g, "");
+        let phone = "";
+
+        if(/^09\d{9}$/.test(digits)){
+            phone = "+63" + digits.substring(1);
+        }else if(/^639\d{9}$/.test(digits)){
+            phone = "+" + digits;
+        }else if(/^\+639\d{9}$/.test(rawPhone)){
+            phone = rawPhone;
+        }else{
+            showToast("Enter a valid Philippine number like 09123456789.");
+            return;
+        }
+
+        if(!recaptchaVerifier){
+            setupRecaptcha();
+            showToast("Complete the verification first.");
+            return;
+        }
+
+        try{
+
+            phoneConfirmation =
+                await signInWithPhoneNumber(
+                    auth,
+                    phone,
+                    recaptchaVerifier
+                );
+
+            smsCodeInput.value = "";
+            phoneCodeBox.style.display = "block";
+
+            showToast(
+                "A new verification code was sent ♡"
+            );
+
+        }catch(error){
+
+            console.error(
+                "RESEND SMS ERROR:",
+                error
+            );
+
+            showToast(
+                phoneError(error)
+            );
+        }
+    }
+);
+
+
+function setupRecaptcha(){
+
+    if(recaptchaVerifier){
+
+        return;
+    }
+
+
+    recaptchaVerifier =
+        new RecaptchaVerifier(
+            auth,
+            "recaptcha-container",
+            {
+
+                size:"normal",
+
+                callback: () => {
+
+                    showToast(
+                        "Verification complete ♡"
+                    );
+                },
+
+                "expired-callback": () => {
+
+                    recaptchaVerifier =
+                        null;
+
+                    document
+                        .getElementById(
+                            "recaptcha-container"
+                        )
+                        .innerHTML = "";
+
+                    showToast(
+                        "Verification expired."
+                    );
+                }
+            }
+        );
+
+
+    recaptchaVerifier
+        .render()
+        .catch(error => {
+
+            console.error(
+                "reCAPTCHA error:",
+                error
+            );
+        });
+}
+
+
+/* SEND SMS */
+
+document
+    .getElementById(
+        "sendCodeButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const rawPhone =
+                document
+                .getElementById(
+                    "phoneInput"
+                )
+                .value
+                .trim();
+
+            /*
+              Users can type:
+              09123456789
+
+              Firebase receives:
+              +639123456789
+            */
+
+            const digits =
+                rawPhone.replace(/\D/g, "");
+
+            let phone = "";
+
+            if(/^09\d{9}$/.test(digits)){
+
+                phone =
+                    "+63" +
+                    digits.substring(1);
+
+            }else if(/^639\d{9}$/.test(digits)){
+
+                phone =
+                    "+" + digits;
+
+            }else if(/^\+639\d{9}$/.test(rawPhone)){
+
+                phone =
+                    rawPhone;
+
+            }else{
+
+                showToast(
+                    "Enter a valid Philippine number like 09123456789."
+                );
+
+                return;
+            }
+
+
+            if(!recaptchaVerifier){
+
+                setupRecaptcha();
+
+                showToast(
+                    "Complete the verification first."
+                );
+
+                return;
+            }
+
+
+            try{
+
+                phoneConfirmation =
+                    await signInWithPhoneNumber(
+                        auth,
+                        phone,
+                        recaptchaVerifier
+                    );
+
+
+                document
+                    .getElementById(
+                        "phoneCodeBox"
+                    )
+                    .style.display =
+                    "block";
+
+
+                document
+                    .getElementById(
+                        "sendCodeButton"
+                    )
+                    .style.display =
+                    "none";
+
+
+                showToast(
+                    "Verification code sent by SMS ♡"
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                showToast(
+                    phoneError(error)
+                );
+
+                resetRecaptcha();
+            }
+        }
+    );
+
+
+/* VERIFY SMS */
+
+document
+    .getElementById(
+        "verifyCodeButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const code =
+                document
+                .getElementById(
+                    "smsCodeInput"
+                )
+                .value
+                .trim();
+
+
+            if(!phoneConfirmation){
+
+                showToast(
+                    "Request a code first."
+                );
+
+                return;
+            }
+
+
+            if(!/^\d{6}$/.test(code)){
+
+                showToast(
+                    "Enter the 6-digit code."
+                );
+
+                return;
+            }
+
+
+            try{
+
+                await phoneConfirmation.confirm(
+                    code
+                );
+
+                showToast(
+                    "Phone sign-in successful ♡"
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                showToast(
+                    "The verification code is invalid."
+                );
+            }
+        }
+    );
+
+
+function resetRecaptcha(){
+
+    recaptchaVerifier =
+        null;
+
+    document
+        .getElementById(
+            "recaptcha-container"
+        )
+        .innerHTML = "";
+
+    document
+        .getElementById(
+            "phoneCodeBox"
+        )
+        .style.display =
+        "none";
+
+    document
+        .getElementById(
+            "sendCodeButton"
+        )
+        .style.display =
+        "block";
+
+    setupRecaptcha();
+}
+
+
+/* =========================================================
+   PHONE ERRORS
+========================================================= */
+
+function phoneError(error){
+
+    console.error(
+        "PHONE AUTH ERROR:",
+        error
+    );
+
+    switch(error.code){
+
+        case "auth/billing-not-enabled":
+            return "Phone login needs Firebase billing enabled.";
+
+        case "auth/operation-not-allowed":
+            return "Phone sign-in is not enabled in Firebase.";
+
+        case "auth/invalid-phone-number":
+            return "Enter a valid Philippine number like 09123456789.";
+
+        case "auth/captcha-check-failed":
+            return "reCAPTCHA failed. Please try again.";
+
+        case "auth/too-many-requests":
+            return "Too many attempts. Try again later.";
+
+        case "auth/quota-exceeded":
+            return "SMS limit reached. Try again later.";
+
+        case "auth/unauthorized-domain":
+            return "Add your GitHub Pages domain to Firebase.";
+
+        case "auth/network-request-failed":
+            return "Check your internet connection.";
+
+        default:
+            return "Firebase error: " + (error.code || "unknown");
+    }
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(user){
+
+            showApp(user);
+
+        }else{
+
+            document
+                .getElementById(
+                    "loginPage"
+                )
+                .style.display =
+                "flex";
+
+            document
+                .getElementById(
+                    "app"
+                )
+                .style.display =
+                "none";
+        }
+    }
+);
+
+
+/* =========================================================
+   SHOW APP
+========================================================= */
+
+function showApp(user){
+
+    document
+        .getElementById(
+            "loginPage"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "app"
+        )
+        .style.display =
+        "block";
+
+
+    const name =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        user.phoneNumber ||
+        "Student";
+
+
+    document
+        .getElementById(
+            "userName"
+        )
+        .textContent =
+        name;
+
+
+    document
+        .getElementById(
+            "profileName"
+        )
+        .textContent =
+        name;
+
+
+    document
+        .getElementById(
+            "profileEmail"
+        )
+        .textContent =
+        user.email ||
+        user.phoneNumber ||
+        "";
+
+
+    loadSchedule();
+}
+
+
+/* =========================================================
+   FIXED LOGOUT
+========================================================= */
+
+window.logOutNow =
+async function(){
+
+    try{
+
+        await signOut(
+            auth
+        );
+
+
+        /* Immediately clear the interface */
+
+        document
+            .getElementById(
+                "app"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "loginPage"
+            )
+            .style.display =
+            "flex";
+
+
+        /* Clear login fields */
+
+        document
+            .getElementById(
+                "emailInput"
+            )
+            .value =
+            "";
+
+
+        document
+            .getElementById(
+                "passwordInput"
+            )
+            .value =
+            "";
+
+
+        showToast(
+            "Logged out successfully ♡"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Logout error:",
+            error
+        );
+
+
+        showToast(
+            "Unable to log out. Please try again."
+        );
+    }
+};
+
+
+/* =========================================================
+   FIREBASE ERROR MESSAGES
+========================================================= */
+
+function firebaseError(error){
+
+    switch(error.code){
+
+        case "auth/invalid-credential":
+            return "Incorrect email or password.";
+
+        case "auth/email-already-in-use":
+            return "That email already has an account.";
+
+        case "auth/invalid-email":
+            return "Please enter a valid email.";
+
+        case "auth/weak-password":
+            return "Password must be at least 6 characters.";
+
+        case "auth/popup-closed-by-user":
+            return "Google sign-in was cancelled.";
+
+        case "auth/popup-blocked":
+            return "Your browser blocked Google sign-in.";
+
+        case "auth/unauthorized-domain":
+            return "Add your GitHub Pages domain in Firebase.";
+
+        case "auth/network-request-failed":
+            return "Check your internet connection.";
+
+        case "auth/account-exists-with-different-credential":
+            return "That email already uses another sign-in method.";
+
+        default:
+            return "Something went wrong. Please try again.";
+    }
+}
+
+
+/* =========================================================
+   SCHEDULE DATA
+========================================================= */
+
+let schedule = {
+
+    Monday:[],
+    Tuesday:[],
+    Wednesday:[],
+    Thursday:[],
+    Friday:[],
+    Saturday:[],
+    Sunday:[]
+};
+
+
+let editingDay = null;
+let editingIndex = null;
+let editMode = false;
+
+
+/* =========================================================
+   SCHEDULE STORAGE
+========================================================= */
+
+function loadSchedule(){
+
+    const saved =
+        localStorage.getItem(
+            "pinkSchedule"
+        );
+
+
+    if(saved){
+
+        try{
+
+            schedule =
+                JSON.parse(saved);
+
+        }catch{
+
+            resetSchedule();
+        }
+    }
+
+
+    ensureDays();
+
+    renderSchedule();
+}
+
+
+function saveSchedule(){
+
+    localStorage.setItem(
+        "pinkSchedule",
+        JSON.stringify(schedule)
+    );
+}
+
+
+function resetSchedule(){
+
+    schedule = {
+
+        Monday:[],
+        Tuesday:[],
+        Wednesday:[],
+        Thursday:[],
+        Friday:[],
+        Saturday:[],
+        Sunday:[]
+    };
+}
+
+
+function ensureDays(){
+
+    [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ]
+    .forEach(
+        day => {
+
+            if(
+                !Array.isArray(
+                    schedule[day]
+                )
+            ){
+
+                schedule[day] = [];
+            }
+        }
+    );
+}
+
+
+/* =========================================================
+   RENDER SCHEDULE
+========================================================= */
+
+function renderSchedule(){
+
+    document
+        .querySelectorAll(
+            ".classes"
+        )
+        .forEach(
+            box => {
+
+                box.innerHTML =
+                    "";
+            }
+        );
+
+
+    let total = 0;
+
+
+    for(
+        const day in schedule
+    ){
+
+        const box =
+            document.querySelector(
+                `.day[data-day="${day}"] .classes`
+            );
+
+
+        if(!box) continue;
+
+
+        if(
+            schedule[day].length === 0
+        ){
+
+            box.innerHTML =
+                `<div class="empty">
+                    No classes
+                </div>`;
+
+            continue;
+        }
+
+
+        schedule[day]
+            .forEach(
+                (item,index) => {
+
+                    total++;
+
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    div.className =
+                        "class-item";
+
+
+                    div.innerHTML = `
+
+                        <div class="time">
+                            ${escapeHTML(item.time)}
+                        </div>
+
+                        <strong>
+                            ${escapeHTML(item.subject)}
+                        </strong>
+
+                        ${
+                            item.teacher
+                            ?
+                            `<small>
+                                ${escapeHTML(item.teacher)}
+                            </small>`
+                            :
+                            ""
+                        }
+
+                        ${
+                            item.room
+                            ?
+                            `<small>
+                                Room: ${escapeHTML(item.room)}
+                            </small>`
+                            :
+                            ""
+                        }
+
+                        ${
+                            editMode
+                            ?
+                            `
+                            <div class="class-actions">
+
+                                <button
+                                    class="edit-btn"
+                                    data-edit-day="${day}"
+                                    data-edit-index="${index}">
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="delete-btn"
+                                    data-delete-day="${day}"
+                                    data-delete-index="${index}">
+                                    Delete
+                                </button>
+
+                            </div>
+                            `
+                            :
+                            ""
+                        }
+                    `;
+
+
+                    box.appendChild(
+                        div
+                    );
+                }
+            );
+    }
+
+
+    document
+        .getElementById(
+            "totalClasses"
+        )
+        .textContent =
+        total;
+
+
+    const today =
+        new Date()
+        .toLocaleDateString(
+            "en-US",
+            {
+                weekday:"long"
+            }
+        );
+
+
+    document
+        .getElementById(
+            "todayClasses"
+        )
+        .textContent =
+        schedule[today]
+        ? schedule[today].length
+        : 0;
+
+
+    updateEditVisual();
+}
+
+
+/* =========================================================
+   EDIT MODE
+========================================================= */
+
+document
+    .getElementById(
+        "viewButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            editMode =
+                false;
+
+            renderSchedule();
+
+            showToast(
+                "View mode ♡"
+            );
+        }
+    );
+
+
+document
+    .getElementById(
+        "editButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            editMode =
+                true;
+
+            renderSchedule();
+
+            showToast(
+                "Edit mode enabled ♡"
+            );
+        }
+    );
+
+
+function updateEditVisual(){
+
+    const container =
+        document.getElementById(
+            "scheduleContainer"
+        );
+
+
+    if(editMode){
+
+        container.classList.add(
+            "editing"
+        );
+
+    }else{
+
+        container.classList.remove(
+            "editing"
+        );
+    }
+}
+
+
+/* =========================================================
+   ADD DAY BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-add]"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if(!editMode){
+
+                        showToast(
+                            "Tap Edit Schedule first."
+                        );
+
+                        return;
+                    }
+
+
+                    openEditor(
+                        button.dataset.add
+                    );
+                }
+            );
+        }
+    );
+
+
+/* =========================================================
+   ADD NAV BUTTON
+========================================================= */
+
+document
+    .querySelector(
+        "[data-add-nav]"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            editMode =
+                true;
+
+            renderSchedule();
+
+            openEditor(
+                "Monday"
+            );
+        }
+    );
+
+
+/* =========================================================
+   EDIT / DELETE BUTTONS
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event => {
+
+        const edit =
+            event.target.closest(
+                ".edit-btn"
+            );
+
+
+        const del =
+            event.target.closest(
+                ".delete-btn"
+            );
+
+
+        if(edit){
+
+            openEditor(
+                edit.dataset.editDay,
+                Number(
+                    edit.dataset.editIndex
+                )
+            );
+        }
+
+
+        if(del){
+
+            deleteClass(
+                del.dataset.deleteDay,
+                Number(
+                    del.dataset.deleteIndex
+                )
+            );
+        }
+    }
+);
+
+
+/* =========================================================
+   OPEN EDITOR
+========================================================= */
+
+function openEditor(
+    day,
+    index = null
+){
+
+    editingDay =
+        day;
+
+    editingIndex =
+        index;
+
+
+    document
+        .getElementById(
+            "dayInput"
+        )
+        .value =
+        day;
+
+
+    if(index !== null){
+
+        const item =
+            schedule[day][index];
+
+
+        document
+            .getElementById(
+                "editorTitle"
+            )
+            .textContent =
+            "Edit Class";
+
+
+        document
+            .getElementById(
+                "timeInput"
+            )
+            .value =
+            item.time || "";
+
+
+        document
+            .getElementById(
+                "subjectInput"
+            )
+            .value =
+            item.subject || "";
+
+
+        document
+            .getElementById(
+                "teacherInput"
+            )
+            .value =
+            item.teacher || "";
+
+
+        document
+            .getElementById(
+                "roomInput"
+            )
+            .value =
+            item.room || "";
+
+    }else{
+
+        document
+            .getElementById(
+                "editorTitle"
+            )
+            .textContent =
+            "Add Class";
+
+
+        document
+            .getElementById(
+                "timeInput"
+            )
+            .value =
+            "";
+
+
+        document
+            .getElementById(
+                "subjectInput"
+            )
+            .value =
+            "";
+
+
+        document
+            .getElementById(
+                "teacherInput"
+            )
+            .value =
+            "";
+
+
+        document
+            .getElementById(
+                "roomInput"
+            )
+            .value =
+            "";
+    }
+
+
+    openPage(
+        "editorPage"
+    );
+}
+
+
+/* =========================================================
+   SAVE CLASS
+========================================================= */
+
+document
+    .getElementById(
+        "saveClassButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            const day =
+                document
+                .getElementById(
+                    "dayInput"
+                )
+                .value;
+
+
+            const item = {
+
+                time:
+                    document
+                    .getElementById(
+                        "timeInput"
+                    )
+                    .value
+                    .trim(),
+
+                subject:
+                    document
+                    .getElementById(
+                        "subjectInput"
+                    )
+                    .value
+                    .trim(),
+
+                teacher:
+                    document
+                    .getElementById(
+                        "teacherInput"
+                    )
+                    .value
+                    .trim(),
+
+                room:
+                    document
+                    .getElementById(
+                        "roomInput"
+                    )
+                    .value
+                    .trim()
+            };
+
+
+            if(
+                !item.time ||
+                !item.subject
+            ){
+
+                showToast(
+                    "Time and subject are required."
+                );
+
+                return;
+            }
+
+
+            if(
+                editingDay !== null &&
+                editingIndex !== null
+            ){
+
+                schedule[editingDay]
+                    .splice(
+                        editingIndex,
+                        1
+                    );
+
+
+                schedule[day]
+                    .push(item);
+
+
+                showToast(
+                    "Class updated ♡"
+                );
+
+            }else{
+
+                schedule[day]
+                    .push(item);
+
+
+                showToast(
+                    "Class added ♡"
+                );
+            }
+
+
+            saveSchedule();
+
+            editingDay =
+                null;
+
+            editingIndex =
+                null;
+
+
+            editMode =
+                true;
+
+
+            renderSchedule();
+
+            goSchedule();
+        }
+    );
+
+
+/* =========================================================
+   CANCEL EDITOR
+========================================================= */
+
+document
+    .getElementById(
+        "cancelEditor"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            editingDay =
+                null;
+
+            editingIndex =
+                null;
+
+            goSchedule();
+        }
+    );
+
+
+/* =========================================================
+   DELETE CLASS
+========================================================= */
+
+function deleteClass(
+    day,
+    index
+){
+
+    if(
+        !confirm(
+            "Delete this class?"
+        )
+    ){
+
+        return;
+    }
+
+
+    schedule[day]
+        .splice(
+            index,
+            1
+        );
+
+
+    saveSchedule();
+
+    renderSchedule();
+
+    showToast(
+        "Class deleted."
+    );
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        searchClasses
+    );
+
+
+function searchClasses(){
+
+    const query =
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    document
+        .querySelectorAll(
+            ".class-item"
+        )
+        .forEach(
+            item => {
+
+                item.style.display =
+                    item.textContent
+                        .toLowerCase()
+                        .includes(query)
+                    ? "block"
+                    : "none";
+            }
+        );
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-page]"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    openPage(
+                        button.dataset.page,
+                        button
+                    );
+                }
+            );
+        }
+    );
+
+
+function openPage(
+    pageId,
+    navButton = null
+){
+
+    document
+        .querySelectorAll(
+            ".page"
+        )
+        .forEach(
+            page =>
+                page.classList.remove(
+                    "active"
+                )
+        );
+
+
+    document
+        .getElementById(
+            pageId
+        )
+        .classList.add(
+            "active"
+        );
+
+
+    document
+        .querySelectorAll(
+            "[data-page]"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if(navButton){
+
+        navButton.classList.add(
+            "active"
+        );
+
+    }else{
+
+        const matching =
+            document.querySelector(
+                `[data-page="${pageId}"]`
+            );
+
+
+        if(matching){
+
+            matching.classList.add(
+                "active"
+            );
+        }
+    }
+}
+
+
+function goSchedule(){
+
+    openPage(
+        "schedulePage"
+    );
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+document
+    .getElementById(
+        "themeButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document.body.classList.toggle(
+                "dark"
+            );
+
+
+            localStorage.setItem(
+                "pinkDark",
+                document.body.classList.contains(
+                    "dark"
+                )
+            );
+        }
+    );
+
+
+if(
+    localStorage.getItem(
+        "pinkDark"
+    ) === "true"
+){
+
+    document.body.classList.add(
+        "dark"
+    );
+}
+
+
+/* =========================================================
+   PIN
+========================================================= */
+
+const pinModal =
+    document.getElementById(
+        "pinModal"
+    );
+
+
+document
+    .getElementById(
+        "pinButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "pinInput"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "pinConfirm"
+                )
+                .value = "";
+
+
+            pinModal.style.display =
+                "flex";
+        }
+    );
+
+
+document
+    .getElementById(
+        "closePinButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            pinModal.style.display =
+                "none";
+        }
+    );
+
+
+document
+    .getElementById(
+        "savePinButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            const pin =
+                document
+                .getElementById(
+                    "pinInput"
+                )
+                .value;
+
+
+            const confirmPin =
+                document
+                .getElementById(
+                    "pinConfirm"
+                )
+                .value;
+
+
+            if(
+                !/^\d{4,6}$/.test(
+                    pin
+                )
+            ){
+
+                showToast(
+                    "PIN must contain 4–6 digits."
+                );
+
+                return;
+            }
+
+
+            if(
+                pin !== confirmPin
+            ){
+
+                showToast(
+                    "PINs do not match."
+                );
+
+                return;
+            }
+
+
+            /*
+              This is a device PIN.
+              It is separate from Firebase password.
+            */
+
+            localStorage.setItem(
+                "pinkSchedulePin",
+                pin
+            );
+
+
+            pinModal.style.display =
+                "none";
+
+
+            showToast(
+                "PIN saved on this device ♡"
+            );
+        }
+    );
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.style.display =
+        "block";
+
+
+    setTimeout(
+        () => {
+
+            toast.style.display =
+                "none";
+
+        },
+        3000
+    );
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+}
+
+</script>
+
+</body>
+</html>
